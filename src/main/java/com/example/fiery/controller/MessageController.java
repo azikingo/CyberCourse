@@ -156,8 +156,8 @@ public class MessageController {
         return "redirect:" + components.getPath();
     }
 
-//Method to save files(photo)
-    private void saveFile(@Valid Message message, @RequestParam("file") MultipartFile file) throws IOException {
+    //Method to save files(photo)
+    private void saveFile(Message message, MultipartFile file) throws IOException {
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) {
@@ -169,4 +169,5 @@ public class MessageController {
             message.setFilename(resultFilename);
         }
     }
+
 }

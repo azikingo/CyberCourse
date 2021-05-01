@@ -14,20 +14,20 @@
             <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            <#if isAdmin>
-            <li class="nav-item">
-                <a class="nav-link" href="/user">User list</a>
-            </li>
-            </#if>
+<#--            <#if isAdmin>-->
+<#--            <li class="nav-item">-->
+<#--                <a class="nav-link" href="/user">User list</a>-->
+<#--            </li>-->
+<#--            </#if>-->
             <#if user?? && name != "unknown">
             <li class="nav-item">
                 <a class="nav-link" href="/course">Courses</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/profile">Profile</a>
+                <a class="nav-link" href="/my-courses">My courses</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/my-courses/${currentUserId}">My courses</a>
+                <a class="nav-link" href="/profile">Profile</a>
             </li>
             </#if>
         </ul>

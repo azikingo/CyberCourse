@@ -14,8 +14,27 @@ public class CoursePart {
 
     private LocalDateTime timestamp;
 
+    @Length(max = 225)
+    private String titleKz;
+    @Length(max = 225)
+    private String titleRu;
+    @Length(max = 225)
+    private String titleEn;
+
+    @Length(max = 225)
+    private String descriptionKz;
+    @Length(max = 225)
+    private String descriptionRu;
+    @Length(max = 225)
+    private String descriptionEn;
+
     @Min(value = 0, message = "0-ден төмен сан енгізуге болмайды")
     private Integer duration;
+
+    @Min(value = 0, message = "0-ден төмен сан енгізуге болмайды")
+    private Integer limitTime;
+
+    private String videoLink;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Course course;
@@ -53,5 +72,69 @@ public class CoursePart {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public String getTitleKz() {
+        return titleKz;
+    }
+
+    public void setTitleKz(String titleKz) {
+        this.titleKz = titleKz;
+    }
+
+    public String getTitleRu() {
+        return titleRu;
+    }
+
+    public void setTitleRu(String titleRu) {
+        this.titleRu = titleRu;
+    }
+
+    public String getTitleEn() {
+        return titleEn;
+    }
+
+    public void setTitleEn(String titleEn) {
+        this.titleEn = titleEn;
+    }
+
+    public String getDescriptionKz() {
+        return descriptionKz;
+    }
+
+    public void setDescriptionKz(String descriptionKz) {
+        this.descriptionKz = descriptionKz;
+    }
+
+    public String getDescriptionRu() {
+        return descriptionRu;
+    }
+
+    public void setDescriptionRu(String descriptionRu) {
+        this.descriptionRu = descriptionRu;
+    }
+
+    public String getDescriptionEn() {
+        return descriptionEn;
+    }
+
+    public void setDescriptionEn(String descriptionEn) {
+        this.descriptionEn = descriptionEn;
+    }
+
+    public Integer getLimitTime() {
+        return limitTime;
+    }
+
+    public void setLimitTime(Integer limitTime) {
+        this.limitTime = limitTime;
+    }
+
+    public String getVideoLink() {
+        return videoLink;
+    }
+
+    public void setVideoLink(String videoLink) {
+        this.videoLink = videoLink;
     }
 }

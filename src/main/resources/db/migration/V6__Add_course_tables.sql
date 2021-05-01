@@ -1,5 +1,5 @@
 create table course (
-  id int8 not null,
+  id bigserial not null,
   timestamp timestamp,
   photo_path varchar(255),
   title_kz varchar(255),
@@ -15,7 +15,7 @@ create table course (
   primary key (id)
 );
 create table course_part (
-  id int8 not null,
+  id bigserial not null,
   course_id int8,
   timestamp timestamp,
   title_kz varchar(255),
@@ -30,7 +30,7 @@ create table course_part (
   primary key (id)
 );
 create table category (
-    id int8 not null,
+    id bigserial not null,
     title_kz varchar(255),
     title_ru varchar(255),
     title_en varchar(255),
@@ -38,12 +38,12 @@ create table category (
 );
 
 create table course_category (
-  course_id int8 not null,
-  category_id int8 not null,
+  course_id bigserial not null,
+  category_id bigserial not null,
   primary key (course_id, category_id)
 );
 create table course_result (
-  id int8 not null,
+  id bigserial not null,
   timestamp timestamp,
   course_id int8,
   student_id int8,
@@ -52,7 +52,7 @@ create table course_result (
   primary key (id)
 );
 create table course_part_result (
-  id int8 not null,
+  id bigserial not null,
   timestamp timestamp,
   course_id int8,
   student_id int8,

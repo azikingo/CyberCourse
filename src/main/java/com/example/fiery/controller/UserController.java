@@ -13,39 +13,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
     @Autowired
     private UserService userService;
 
 //    Userlist page users (only for admin(s))
-    @PreAuthorize("hasAuthority('admin')")
-    @GetMapping
-    public String userList(Model model){
-        model.addAttribute("users", userService.findAll());
-        return "userList";
-    }
+//    @PreAuthorize("hasAuthority('admin')")
+//    @GetMapping
+//    public String userList(Model model){
+//        model.addAttribute("users", userService.findAll());
+//        return "userList";
+//    }
 
 //    Method to edit users in list (only for admin(s))
-    @PreAuthorize("hasAuthority('admin')")
-    @GetMapping("{user}")
-    public String userEditForm(@PathVariable User user, Model model){
-        model.addAttribute("user", user);
-        model.addAttribute("roles", Role.values());
-        return "userEdit";
-    }
+//    @PreAuthorize("hasAuthority('admin')")
+//    @GetMapping("{user}")
+//    public String userEditForm(@PathVariable User user, Model model){
+//        model.addAttribute("user", user);
+//        model.addAttribute("roles", Role.values());
+//        return "userEdit";
+//    }
 
 //    Method to save change (only for admin(s))
-    @PreAuthorize("hasAuthority('admin')")
-    @PostMapping
-    public String userSave(
-            @RequestParam String username,
-            @RequestParam Map<String, String> form,
-            @RequestParam("userId") User user
-    ){
-        userService.saveUser(user, username, form);
-        return "redirect:/user";
-    }
+//    @PreAuthorize("hasAuthority('admin')")
+//    @PostMapping
+//    public String userSave(
+//            @RequestParam String username,
+//            @RequestParam Map<String, String> form,
+//            @RequestParam("userId") User user
+//    ){
+//        userService.saveUser(user, username, form);
+//        return "redirect:/user";
+//    }
 
 //    User profile page
     @GetMapping("profile")

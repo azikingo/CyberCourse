@@ -16,6 +16,8 @@ public class Course {
 
     private LocalDateTime timestamp;
 
+    private String photoPath;
+
     @Length(max = 225)
     private String titleKz;
     @Length(max = 225)
@@ -37,7 +39,7 @@ public class Course {
     private Integer duration;
 
     @Min(value = 0, message = "0-ден төмен сан енгізуге болмайды")
-    private Integer limit_time;
+    private Integer limitTime;
 
     private boolean active = true;
 
@@ -69,6 +71,22 @@ public class Course {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photoPath) {
+        this.photoPath = photoPath;
+    }
+
+    public Integer getLimitTime() {
+        return limitTime;
+    }
+
+    public void setLimitTime(Integer limitTime) {
+        this.limitTime = limitTime;
     }
 
     public String getTitleKz() {
@@ -133,14 +151,6 @@ public class Course {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
-    }
-
-    public Integer getLimit_time() {
-        return limit_time;
-    }
-
-    public void setLimit_time(Integer limit_time) {
-        this.limit_time = limit_time;
     }
 
     public boolean isActive() {
