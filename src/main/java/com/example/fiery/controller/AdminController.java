@@ -3,6 +3,7 @@ package com.example.fiery.controller;
 import com.example.fiery.domain.*;
 import com.example.fiery.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,9 @@ public class AdminController {
     @Autowired
     QuizService quizService;
 
+    @Value("${upload.path}")
+    private String uploadPath;
+
     @GetMapping
     public String adminPage(Model model)
     {
@@ -47,6 +51,7 @@ public class AdminController {
     public String getCoursePage(Model model)
     {
         model.addAttribute("url", "/admin/course");
+        model.addAttribute("uploadPath", uploadPath);
         model.addAttribute("courses", courseService.getAllCourses());
         return "course";
     }
