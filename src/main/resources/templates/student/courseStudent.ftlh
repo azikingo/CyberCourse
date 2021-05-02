@@ -2,7 +2,7 @@
     <@c.page>
 <div class="container mt-5">
     <#if url?contains("/student/course/")>
-        <div class="row">
+        <div class="flex">
             <img class="card-img-top" src="/img/${course.photoPath!''}"
                  style="width: 100%; height: 300px" alt="Course photo">
             <div>
@@ -14,6 +14,13 @@
                 <h4><em>${course.price!''} kzt</em></h4>
                 <p>Course duration: <em>${course.duration!'4'} h</em></p>
                 <p>Course limit: <em>${course.limitTime!'5 '} w</em></p>
+                <a href="${url}/subscribe" class="btn btn-primary">Тіркелу</a>
+            </div>
+            <div>
+                <h4><em>Course parts</em></h4>
+                <#list course.courseParts as coursePart>
+                    <p>${coursePart.titleKz!''} : <em>${coursePart.duration?c} h</em></p>
+                </#list>
             </div>
         </div>
     <#elseif url?contains("/student/course")>
