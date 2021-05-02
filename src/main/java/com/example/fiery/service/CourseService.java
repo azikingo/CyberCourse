@@ -45,6 +45,26 @@ public class CourseService {
         return result;
     }
 
+    public Map<String, String> editCourse(Course course, MultipartFile file) throws IOException {
+        course.setTitleKz(course.getTitleKz().replaceAll("\"", "&#8220;"));
+        course.setTitleRu(course.getTitleRu().replaceAll("\"", "&#8220;"));
+        course.setTitleEn(course.getTitleEn().replaceAll("\"", "&#8220;"));
+        course.setDescriptionKz(course.getDescriptionKz().replaceAll("\"", "&#8220;"));
+        course.setDescriptionRu(course.getDescriptionRu().replaceAll("\"", "&#8220;"));
+        course.setDescriptionEn(course.getDescriptionEn().replaceAll("\"", "&#8220;"));
+        saveFile(course, file);
+
+        Map<String, String> result = new HashMap<>();
+        try {
+            courseRepo.save(course);
+        } catch (Exception e) {
+            result.put("message", "Сақталмады! Жүйеде қателік шықты.");
+            return result;
+        }
+
+        return result;
+    }
+
     public List<Course> getAllCourses() {
         return courseRepo.getAllCourses();
     }

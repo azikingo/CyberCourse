@@ -17,7 +17,7 @@
                             <a href="/admin/course" style="text-decoration: none; margin: 1em">Courses</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="/admin/course/addCourse" style="text-decoration: none; margin: 1em">Add new course</a>
+                            <a href="/admin/addCourse" style="text-decoration: none; margin: 1em">Add new course</a>
                         </li>
                     </ul>
                 </div>

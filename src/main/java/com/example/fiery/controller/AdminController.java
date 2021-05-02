@@ -43,7 +43,9 @@ public class AdminController {
         return "greeting";
     }
 
-//    Courses
+
+
+//    """"""""""""""""""""""""""""""""""""""""""""""" Courses """""""""""""""""""""""""""""""""""""""""""""""
     @GetMapping("/course")
     public String getCoursePage(Model model)
     {
@@ -52,15 +54,15 @@ public class AdminController {
         return "course";
     }
 
-    @GetMapping("/course/addCourse")
+    @GetMapping("/addCourse")
     public String addCoursePage(Model model)
     {
-        model.addAttribute("url", "/admin/course/addCourse");
+        model.addAttribute("url", "/admin/addCourse");
         model.addAttribute("categories", categoryService.getAllCategories());
         return "course";
     }
 
-    @PostMapping("/course/addCourse")
+    @PostMapping("/addCourse")
     public String addCourse(
             @Valid Course course, BindingResult bindingResult,
             @AuthenticationPrincipal User user, Model model,
@@ -89,6 +91,43 @@ public class AdminController {
         return "redirect:/admin/course";
     }
 
+    @GetMapping("/editCourse")
+    public String editCoursePage(Model model)
+    {
+        model.addAttribute("url", "/admin/editCourse");
+        model.addAttribute("categories", categoryService.getAllCategories());
+        return "course";
+    }
+
+    @PostMapping("/editCourse")
+    public String editCourse(
+            @Valid Course course, BindingResult bindingResult,
+            @AuthenticationPrincipal User user, Model model,
+            @RequestParam(defaultValue = "none") String alert,
+            @RequestParam("file") MultipartFile file
+    ) throws IOException {
+        if (user == null)
+            return "redirect:/";
+
+        model.addAttribute("url", "/admin/editCourse");
+        model.addAttribute("alert", alert);
+
+        if (bindingResult.hasErrors()) {
+            Map<String, String> bindErrors = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(bindErrors);
+            return "course";
+        }
+
+        Map<String, String> serviceResult = courseService.editCourse(course, file);
+
+        if (!serviceResult.isEmpty()) {
+            model.mergeAttributes(serviceResult);
+            return "course";
+        }
+
+        return "redirect:/admin/course";
+    }
+
     @GetMapping("/course/{course}")
     public String getCourseDetail(
             @PathVariable Course course, Model model
@@ -97,7 +136,8 @@ public class AdminController {
         return "courseDetailed";
     }
 
-//    Course Parts
+
+//    """"""""""""""""""""""""""""""""""""""""""""""" Course Parts """""""""""""""""""""""""""""""""""""""""""""""
     @GetMapping("/course/{course}/parts")
     public String getCoursePartPage(
             @PathVariable Course course, Model model
@@ -154,7 +194,9 @@ public class AdminController {
         return "coursePartDetailed";
     }
 
-//    Course Part quiz
+
+
+//    """"""""""""""""""""""""""""""""""""""""""""""" Course Part quiz """""""""""""""""""""""""""""""""""""""""""""""
     @GetMapping("/course/{course}/parts/{coursePart}/quiz")
     public String getQuizPage(
             @PathVariable Course course,
@@ -214,7 +256,10 @@ public class AdminController {
 //        return "coursePartDetailed";
 //    }
 
-//  Category
+
+
+
+//    """"""""""""""""""""""""""""""""""""""""""""""" Category """""""""""""""""""""""""""""""""""""""""""""""
     @GetMapping("/category")
     public String getCategoryPage(Model model)
     {

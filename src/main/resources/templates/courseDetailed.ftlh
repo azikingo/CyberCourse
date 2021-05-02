@@ -17,7 +17,7 @@
                             <a href="/admin/course" style="text-decoration: none; margin: 1em">Courses</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="/admin/course/addCourse" style="text-decoration: none; margin: 1em">Add new course</a>
+                            <a href="/admin/addCourse" style="text-decoration: none; margin: 1em">Add new course</a>
                         </li>
                     </ul>
                 </div>
@@ -213,6 +213,9 @@
                     <h4><em>${course.price!''} kzt</em></h4>
                     <p>Course duration: <em>${course.duration!'4h'}</em></p>
                     <p>Course limit: <em>${course.limitTime!'5w'}</em></p>
+                </div>
+                <div>
+                    <a href="${url}/${course.id?c}" class="btn btn-primary">Edit course</a>
                 </div>
             </div>
         </#if>

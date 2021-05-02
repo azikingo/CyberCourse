@@ -17,7 +17,7 @@
                             <a href="/admin/course" style="text-decoration: none; margin: 1em">Courses</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="/admin/course/addCourse" style="text-decoration: none; margin: 1em">Add new course</a>
+                            <a href="/admin/addCourse" style="text-decoration: none; margin: 1em">Add new course</a>
                         </li>
                     </ul>
                 </div>
@@ -43,7 +43,7 @@
 </div>
 <div class="col-9">
     <div class="container mt-5">
-        <#if url?contains("/admin/course")>
+        <#if url == "/admin/course">
             <div class="row">
                 <#list courses as course>
                     <div class="card m-4" style="width: 18rem;">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
             </div>
-        <#elseif url?contains("/admin/course/addCourse")>
+        <#elseif url == "/admin/addCourse" || url == "/admin/editCourse">
             <div class="form-group mt-3">
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
@@ -187,7 +187,7 @@
 <#--                            * Шектеуі (аптамен)-->
 <#--                        </label>-->
 <#--                        <input type="number" class="form-control"-->
-<#--                               value="<#if course??>${course.limitTime?c}</#if>" name="tag" placeholder="Course limit time" />-->
+<#--                               value="<#if course??>${course.limitTime?c}</#if>" name="limitTime" placeholder="Course limit time" />-->
 <#--                        <#if limitTimeError??>-->
 <#--                            <div class="invalid-feedback">-->
 <#--                                ${limitTimeError}-->
@@ -203,13 +203,11 @@
                     <input type="hidden" name="_csrf" value="${_csrf.token}" />
                     <input type="hidden" name="id" value="<#if course??>${course.id}</#if>" />
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary"><#if url == "/admin/addCourse">Add<#else>Save</#if></button>
                     </div>
                 </form>
             </div>
-        <#elseif url?contains("/admin/course/part")>
-        <#elseif url?contains("/admin/course/addPart")>
-        <#elseif url?contains("/admin/category")>
+        <#elseif url == "/admin/category">
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -340,7 +338,7 @@
                 </#list>
                 </tbody>
             </table>
-        <#elseif url?contains("/admin/addCategory")>
+        <#elseif url == "/admin/addCategory">
             <div class="form-group mt-3">
                 <form method="post">
                     <div class="form-group">
