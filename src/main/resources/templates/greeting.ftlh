@@ -497,5 +497,5 @@
         </div>
     </div>
 </section>
-<div style="height: 200px"></div>
+<#include "parts/footer.ftlh">
 </@c.page>
