@@ -13,6 +13,6 @@ public interface CoursePartRepo extends CrudRepository<CoursePart, Long> {
     List<CoursePart> getAllCourseParts();
 
     @Query(value = "select * from course_part\n" +
-            "where course_id = ?1", nativeQuery = true)
-    List<CoursePart> getCoursePartsByCourse(Course course);
+            "where course_id = ?1 and active = true", nativeQuery = true)
+    List<CoursePart> getActiveCoursePartsByCourse(Long courseId);
 }

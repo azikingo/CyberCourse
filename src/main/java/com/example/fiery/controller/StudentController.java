@@ -1,23 +1,14 @@
 package com.example.fiery.controller;
 
-import com.example.fiery.domain.Category;
 import com.example.fiery.domain.Course;
-import com.example.fiery.domain.User;
 import com.example.fiery.service.AdminService;
 import com.example.fiery.service.CategoryService;
 import com.example.fiery.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.Valid;
-import java.io.IOException;
-import java.util.Map;
 
 @Controller
 @PreAuthorize("hasAuthority('student')")
@@ -43,7 +34,7 @@ public class StudentController {
     public String getCoursePage(Model model)
     {
         model.addAttribute("url", "/student/course");
-        model.addAttribute("courses", courseService.getAllCourses());
+        model.addAttribute("courses", courseService.getAllActiveCourses(null, null));
         return "student/courseStudent";
     }
 

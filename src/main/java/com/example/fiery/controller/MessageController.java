@@ -89,26 +89,26 @@ public class MessageController {
     }
 
 //    User page, to see all details (subscriptions and subscribes) of user also posts
-    @GetMapping("/my-courses/{author}")
-    public String userMessages(
-            @AuthenticationPrincipal User currentUser,
-            @PathVariable User author,
-            Model model,
-            @RequestParam(required = false) Message message,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
-    ){
-        Page<MessageDto> page = messageService.messageListForUser(pageable, currentUser, author);
-
-        model.addAttribute("userChannel", author);
-        model.addAttribute("subscriptionsCount", author.getSubscriptions().size());
-        model.addAttribute("subscribersCount", author.getSubscribers().size());
-        model.addAttribute("isSubscriber", author.getSubscribers().contains(currentUser));
-        model.addAttribute("page", page);
-        model.addAttribute("message", message);
-        model.addAttribute("isCurrentUser", currentUser.equals(author));
-        model.addAttribute("url", "/user-messages" + author.getId());
-        return "userMessages";
-    }
+//    @GetMapping("/my-courses/{author}")
+//    public String userMessages(
+//            @AuthenticationPrincipal User currentUser,
+//            @PathVariable User author,
+//            Model model,
+//            @RequestParam(required = false) Message message,
+//            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable
+//    ){
+//        Page<MessageDto> page = messageService.messageListForUser(pageable, currentUser, author);
+//
+//        model.addAttribute("userChannel", author);
+//        model.addAttribute("subscriptionsCount", author.getSubscriptions().size());
+//        model.addAttribute("subscribersCount", author.getSubscribers().size());
+//        model.addAttribute("isSubscriber", author.getSubscribers().contains(currentUser));
+//        model.addAttribute("page", page);
+//        model.addAttribute("message", message);
+//        model.addAttribute("isCurrentUser", currentUser.equals(author));
+//        model.addAttribute("url", "/user-messages" + author.getId());
+//        return "userMessages";
+//    }
 
 //    It uses to change user's post
     @PostMapping("/user-messages/{user}")

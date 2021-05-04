@@ -14,36 +14,36 @@
                 <div id="menuOne" class="collapse" aria-labelledby="areaOne" data-parent="#accordion">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a href="/admin/course" style="text-decoration: none; margin: 1em">Courses</a>
+                            <a href="/my-courses" style="text-decoration: none; margin: 1em">My courses</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="/admin/addCourse" style="text-decoration: none; margin: 1em">Add new course</a>
+                            <a href="/my-courses/add" style="text-decoration: none; margin: 1em">Add new course</a>
                         </li>
                     </ul>
                 </div>
-                <div id="areaThree">
-                    <a href="#" class="list-group-item list-group-item-action"
-                       data-toggle="collapse" data-target="#menuThree" aria-expanded="true" aria-controls="menuThree">
-                        Category
-                    </a>
-                </div>
-                <div id="menuThree" class="collapse" aria-labelledby="areaThree" data-parent="#accordion">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <a href="/admin/category" style="text-decoration: none; margin: 1em">Categories</a><br>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="/admin/addCategory" style="text-decoration: none; margin: 1em">Add new category</a>
-                        </li>
-                    </ul>
-                </div>
+<#--                <div id="areaThree">-->
+<#--                    <a href="#" class="list-group-item list-group-item-action"-->
+<#--                       data-toggle="collapse" data-target="#menuThree" aria-expanded="true" aria-controls="menuThree">-->
+<#--                        Category-->
+<#--                    </a>-->
+<#--                </div>-->
+<#--                <div id="menuThree" class="collapse" aria-labelledby="areaThree" data-parent="#accordion">-->
+<#--                    <ul class="list-group list-group-flush">-->
+<#--                        <li class="list-group-item">-->
+<#--                            <a href="/category" style="text-decoration: none; margin: 1em">Categories</a><br>-->
+<#--                        </li>-->
+<#--                        <li class="list-group-item">-->
+<#--                            <a href="/addCategory" style="text-decoration: none; margin: 1em">Add new category</a>-->
+<#--                        </li>-->
+<#--                    </ul>-->
+<#--                </div>-->
             </div>
         </div>
     </ul>
 </div>
 <div class="col-9">
     <div class="container mt-5">
-        <#if url == "/admin/course">
+        <#if url == "/my-courses">
             <div class="row">
                 <#list courses as course>
                     <div class="card m-4" style="width: 18rem;">
@@ -60,24 +60,15 @@
                 <#else>
                     Курс тіркелмеген
                 </#list>
-                <div class="card m-4" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <div class="card m-4" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
             </div>
-        <#elseif url == "/admin/addCourse" || url == "/admin/editCourse">
+        <#elseif url == "/my-courses/add" || url?contains("/edit")>
+            <div class="text-info text-center mx-1 mb-2">
+                <#if url == "/my-courses/add">
+                    Жаңа курс енгізу
+                <#else>
+                    &#8220;${course.titleKz!''}&#8221; курсын өзгерту
+                </#if>
+            </div>
             <div class="form-group mt-3">
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
@@ -165,7 +156,15 @@
                                     title="Категория..."
                                     data-selected-text-format="count > 5">
                                 <#list categories as category>
-                                    <option value="${category.id}">${category.titleKz!''}</option>
+                                    <#if course??>
+                                        <option value="${category.id}"
+                                            <#list course.categories as courseCategory>
+                                                <#if category.id==courseCategory.id>selected</#if>
+                                            </#list>
+                                        >${category.titleKz!''}</option>
+                                    <#else>
+                                        <option value="${category.id}">${category.titleKz!''}</option>
+                                    </#if>
                                 </#list>
                             </select>
                         </div>
@@ -195,19 +194,84 @@
 <#--                        </#if>-->
 <#--                    </div>-->
                     <div class="form-group">
+<#--                        <#if course??>-->
+<#--                            <img class="card-img-top" src="/img/${course.photoPath!''}"-->
+<#--                                 style="width: 100%; height: 300px" alt="Course photo">-->
+<#--                        </#if>-->
                         <div class="custom-file">
                             <input type="file" name="file" id="customFile">
-                            <label class="custom-file-label" for="customFile">Course photo</label>
+                            <label class="custom-file-label" for="customFile"><#if course??>${course.photoPath!''}<#else>Course photo</#if></label>
                         </div>
                     </div>
                     <input type="hidden" name="_csrf" value="${_csrf.token}" />
                     <input type="hidden" name="id" value="<#if course??>${course.id}</#if>" />
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><#if url == "/admin/addCourse">Add<#else>Save</#if></button>
+                        <button type="submit" class="btn btn-primary"><#if url == "/my-courses/add">Add<#else>Save</#if></button>
                     </div>
                 </form>
             </div>
-        <#elseif url == "/admin/category">
+        <#elseif url?contains("/my-courses/")>
+            <div class="row">
+                <img class="card-img-top" src="/img/${course.photoPath!''}"
+                     style="width: 100%; height: 300px" alt="Course photo">
+                <div>
+                    <h1><em>${course.titleKz!''}</em></h1>
+                    <#list course.categories as category>
+                        <em>${category.titleKz!''}<#sep>, </#sep></em>
+                    </#list>
+                    <h5>${course.descriptionKz!''}</h5>
+                    <h4><em>${course.price!''} kzt</em></h4>
+                    <p>Course duration: <em>${course.duration!'4h'}</em></p>
+                    <p>Course limit: <em>${course.limitTime!'5w'}</em></p>
+                </div>
+                <div>
+                    <a href="${url}/parts" class="btn btn-primary">Parts</a>
+                    <a href="${url}/edit" class="btn btn-primary">Edit course</a>
+                    <#--------------------------------------Delete modal---------------------------------------->
+                    <a href="#" class="btn btn-danger" data-toggle="modal"
+                       data-target="#del${course.id?c}">Delete course</a>
+                    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+                         aria-labelledby="mySmallModalLabel" aria-hidden="true"
+                         id="del${course.id?c}">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">
+                                        Сенімдісіз бе?
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Сіз &#8220;${course.getTitleKz()}&#8221; курсын
+                                        жойғалы жатырсыз. Келісесіз бе?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form class="form-inline" action="${url}/del" method="post">
+                                        <input type="hidden" name="courseId" value="${course.getId()?c}"/>
+                                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                        <button type="submit" class="btn btn-success btn-sm px-3 mr-1">
+                                            Иә
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
+                                            Жоқ
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        <#elseif url == "/category">
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -338,7 +402,7 @@
                 </#list>
                 </tbody>
             </table>
-        <#elseif url == "/admin/addCategory">
+        <#elseif url == "/addCategory">
             <div class="form-group mt-3">
                 <form method="post">
                     <div class="form-group">

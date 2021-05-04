@@ -36,8 +36,13 @@ public class CoursePart {
 
     private String videoLink;
 
+    private boolean active = true;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private Course course;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Quiz quiz;
 
     public CoursePart() {
     }
@@ -136,5 +141,21 @@ public class CoursePart {
 
     public void setVideoLink(String videoLink) {
         this.videoLink = videoLink;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 }

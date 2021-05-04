@@ -14,10 +14,10 @@
                     <div id="menuOne" class="collapse" aria-labelledby="areaOne" data-parent="#accordion">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <a href="/admin/course" style="text-decoration: none; margin: 1em">Courses</a>
+                                <a href="/my-courses" style="text-decoration: none; margin: 1em">Courses</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="/admin/course/addCourse" style="text-decoration: none; margin: 1em">Add new course</a>
+                                <a href="/my-courses/addCourse" style="text-decoration: none; margin: 1em">Add new course</a>
                             </li>
                         </ul>
                     </div>
@@ -30,54 +30,32 @@
                     <div id="menuTwo" class="collapse" aria-labelledby="areaTwo" data-parent="#accordion">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <a href="/admin/course/${course.id?c}/parts" style="text-decoration: none; margin: 1em">Course parts</a>
+                                <a href="/my-courses/${course.id?c}/parts" style="text-decoration: none; margin: 1em">Course parts</a>
                             </li>
                             <li class="list-group-item">
-                                <a href="/admin/course/${course.id?c}/addPart" style="text-decoration: none; margin: 1em">Add new course part</a>
+                                <a href="/my-courses/${course.id?c}/addPart" style="text-decoration: none; margin: 1em">Add new course part</a>
                             </li>
                         </ul>
                     </div>
-<#--                    <div id="areaThree">-->
-<#--                        <a href="#" class="list-group-item list-group-item-action"-->
-<#--                           data-toggle="collapse" data-target="#menuThree" aria-expanded="true" aria-controls="menuThree">-->
-<#--                            Course part quiz-->
-<#--                        </a>-->
-<#--                    </div>-->
-<#--                    <div id="menuThree" class="collapse" aria-labelledby="areaThree" data-parent="#accordion">-->
-<#--                        <ul class="list-group list-group-flush">-->
-<#--                            <li class="list-group-item">-->
-<#--                                <a href="/admin/course/${course.id?c}/parts" style="text-decoration: none; margin: 1em">Quiz</a>-->
-<#--                            </li>-->
-<#--                            <li class="list-group-item">-->
-<#--                                <a href="/admin/course/${course.id?c}/addPart" style="text-decoration: none; margin: 1em">Question</a>-->
-<#--                            </li>-->
-<#--                        </ul>-->
-<#--                    </div>-->
                     <div id="areaFour">
-                        <a href="/admin/course/${course.id?c}/parts/${coursePart.id?c}/quiz" class="list-group-item list-group-item-action">
+                        <a href="/my-courses/${course.id?c}/parts/${coursePart.id?c}/quiz" class="list-group-item list-group-item-action">
                             Course part quiz
                         </a>
                     </div>
-                    <#--                <div id="menuFour" class="collapse" aria-labelledby="areaFour" data-parent="#accordion">-->
-                    <#--                    <ul class="list-group list-group-flush">-->
-                    <#--                        <li class="list-group-item">-->
-                    <#--                            <a href="/" style="text-decoration: none; margin: 1em">Quizes</a>-->
-                    <#--                        </li>-->
-                    <#--                        <li class="list-group-item">-->
-                    <#--                            <a href="/" style="text-decoration: none; margin: 1em">Add new quiz</a>-->
-                    <#--                        </li>-->
-                    <#--                    </ul>-->
-                    <#--                </div>-->
                 </div>
             </div>
         </ul>
     </div>
     <div class="col-9">
         <div class="container mt-5">
-            <#if url?contains("/quiz/addQuestion")>
+            <#if url?contains("/addQuestion") || url?contains("/edit")>
                 <div class="form-group mt-3">
                     <div class="text-info text-center mx-1 mb-2">
-                        Жаңа сұрақ енгізу
+                        <#if url?contains("/addQuestion")>
+                            Жаңа сұрақ енгізу
+                        <#else>
+                            &#8220;${quizQuestion.textKz!''}&#8221; сұрағын өзгерту
+                        </#if>
                     </div>
                     <form method="post">
                         <div class="form-group">
@@ -85,7 +63,7 @@
                                 * Қазақша атауы
                             </label>
                             <input type="text" class="form-control ${(textKzError??)?string('is-invalid','')}"
-                                   value="<#if question??>${question.textKz!''}</#if>" name="textKz" placeholder="Question text kz" />
+                                   value="<#if quizQuestion??>${quizQuestion.textKz!''}</#if>" name="textKz" placeholder="Question text kz" />
                             <#if textKzError??>
                                 <div class="invalid-feedback">
                                     ${textKzError}
@@ -97,7 +75,7 @@
                                 * Орысша атауы
                             </label>
                             <input type="text" class="form-control ${(textRuError??)?string('is-invalid','')}"
-                                   value="<#if question??>${question.textRu!''}</#if>" name="textRu" placeholder="Question text ru" />
+                                   value="<#if quizQuestion??>${quizQuestion.textRu!''}</#if>" name="textRu" placeholder="Question text ru" />
                             <#if textRuError??>
                                 <div class="invalid-feedback">
                                     ${textRuError}
@@ -109,7 +87,7 @@
                                 * Ағылшынша атауы
                             </label>
                             <input type="text" class="form-control ${(textEnError??)?string('is-invalid','')}"
-                                   value="<#if question??>${question.textEn!''}</#if>" name="textEn" placeholder="Question text en" />
+                                   value="<#if quizQuestion??>${quizQuestion.textEn!''}</#if>" name="textEn" placeholder="Question text en" />
                             <#if textEnError??>
                                 <div class="invalid-feedback">
                                     ${textEnError}
@@ -117,12 +95,33 @@
                             </#if>
                         </div>
                         <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                        <input type="hidden" name="id" value="<#if question??>${question.id}</#if>" />
+                        <input type="hidden" name="id" value="<#if quizQuestion??>${quizQuestion.id}</#if>" />
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary"><#if url?contains("/addQuestion")>Add<#else>Save</#if></button>
                         </div>
                     </form>
                 </div>
+            <#elseif url?contains("/quiz/")>
+            <#elseif url?contains("/quiz/")>
+                <form method="post">
+                    <div class="row">
+                        <div>
+                            <h2><em>${quizQuestion.textKz!''}</em></h2>
+                        </div>
+                    </div>
+                    <#list quizAnswers as quizAnswer>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="radio${quizAnswer.id?c}" ${quizAnswer.correctAnswer?then("checked","")}>
+                            <label class="form-check-label" for="radio${quizAnswer.id?c}">
+                                ${quizAnswer.textKz!''}
+                            </label>
+                        </div>
+                    <#else>
+                        Жауаптар енгізілмеген
+                    </#list>
+                    <a class="btn btn-primary" href="${url}/addAnswer" role="button">Add answer</a>
+                    <button type="submit" class="btn btn-success">Save</button>
+                </form>
             <#elseif url?contains("/quiz")>
                 <#if quiz??>
                     <div class="row">
@@ -154,7 +153,7 @@
                                         жойғалы жатырсыз. Келісесіз бе?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <form class="form-inline" action="${url}/delete" method="post">
+                                    <form class="form-inline" action="${url}/del" method="post">
                                         <input type="hidden" name="quizId" value="${quiz.getId()?c}"/>
                                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                         <button type="submit" class="btn btn-success btn-sm px-3 mr-1">
@@ -169,7 +168,7 @@
                         </div>
                     </div>
                 <#else>
-                    <a class="btn btn-primary" href="/admin/course/${course.id?c}/parts/${coursePart.id?c}/quiz/addQuiz" role="button">Add quiz</a>
+                    <a class="btn btn-primary" href="/my-courses/${course.id?c}/parts/${coursePart.id?c}/quiz/addQuiz" role="button">Add quiz</a>
                 </#if>
             <#elseif url?contains("/parts/")>
                 <div class="row">
