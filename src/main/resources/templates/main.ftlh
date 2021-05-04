@@ -66,7 +66,7 @@
             </div>
             <#if isStudent>
                 <div>
-                    <a href="${url}/sub" class="btn btn-primary">Subscribe</a>
+                    <a href="/student/my-courses/${course.id?c}/sub" class="btn btn-primary">Subscribe</a>
                 </div>
             </#if>
         </div>

@@ -23,6 +23,7 @@
 </head>
 <body>
 <#include "navbar.ftlh">
+<div style="height: 4em"></div>
 <#nested>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

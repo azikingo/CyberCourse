@@ -1,7 +1,7 @@
 <#include "security.ftlh">
 <#import "login.ftlh" as l>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <a class="navbar-brand" href="/">
         <img src="https://i.ibb.co/3Y0PLd1/116853-128-3.png" width="40" height="40" class="d-inline-block align-top" alt="">
     </a>
@@ -24,7 +24,7 @@
                 <a class="nav-link" href="/course">Courses</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/my-courses">My courses</a>
+                <a class="nav-link" href="${isStudent?then("/student","")}/my-courses">My courses</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/profile">Profile</a>

@@ -29,6 +29,13 @@ public class CourseService {
         return courseRepo.getAllActiveCoursesForTeacher(user);
     }
 
+    public List<Course> getAllActiveCoursesForStudent(String filter, Category category, User user) {
+        if(category == null)
+            return courseRepo.getAllActiveCoursesForStudent(filter, user);
+        else
+            return courseRepo.getAllActiveCoursesForStudentByFilterAndCategory(filter, category, user);
+    }
+
     public List<Course> getAllActiveCourses(String filter, Category category) {
         if(filter == null && category == null)
             return courseRepo.getAllActiveCourses();

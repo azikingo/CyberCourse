@@ -71,7 +71,7 @@ public class CourseController {
             @RequestParam("file") MultipartFile file
     ) throws IOException {
         if (user == null)
-            return "redirect:";
+            return "redirect:/";
 
         model.addAttribute("url", "/my-courses/add");
         model.addAttribute("alert", alert);
@@ -161,124 +161,6 @@ public class CourseController {
     }
 
 
-////    """"""""""""""""""""""""""""""""""""""""""""""" Course Parts """""""""""""""""""""""""""""""""""""""""""""""
-//    @GetMapping("/{course}/parts")
-//    public String getCoursePartPage(
-//            @PathVariable Course course, Model model
-//    ){
-//        model.addAttribute("url", "/my-courses/" + course.getId() + "/parts");
-//        model.addAttribute("courseParts", coursePartService.getActiveCoursePartsByCourse(course));
-//        return "courseDetailed";
-//    }
-//
-//    @GetMapping("/{course}/addPart")
-//    public String addCoursePartPage(
-//            @PathVariable Course course, Model model
-//    ){
-//        model.addAttribute("url", "/my-courses/" + course.getId() + "/addPart");
-//        return "courseDetailed";
-//    }
-//
-//    @PostMapping("/{course}/addPart")
-//    public String addCoursePart(
-//            @Valid CoursePart coursePart,
-//            @PathVariable Course course, BindingResult bindingResult,
-//            @AuthenticationPrincipal User user, Model model,
-//            @RequestParam(defaultValue = "none") String alert
-//    ) throws IOException {
-//        if (user == null)
-//            return "redirect:/";
-//
-//        model.addAttribute("url", "/my-courses/" + course.getId() + "/addPart");
-//        model.addAttribute("alert", alert);
-//
-//        if (bindingResult.hasErrors()) {
-//            Map<String, String> bindErrors = ControllerUtils.getErrors(bindingResult);
-//            model.mergeAttributes(bindErrors);
-//            return "courseDetailed";
-//        }
-//
-//        Map<String, String> serviceResult = coursePartService.addCoursePart(course, coursePart);
-//
-//        if (!serviceResult.isEmpty()) {
-//            model.mergeAttributes(serviceResult);
-//            return "courseDetailed";
-//        }
-//
-//        return "redirect:/my-courses/" + course.getId() + "/parts";
-//    }
-//
-//    @GetMapping("/{course}/parts/{coursePart}")
-//    public String getCoursePartDetail(
-//            @PathVariable Course course,
-//            @PathVariable CoursePart coursePart,
-//            Model model
-//    ){
-//        model.addAttribute("url", "/my-courses/" + course.getId() + "/parts/" + coursePart.getId());
-//        return "coursePartDetailed";
-//    }
-//
-//    @GetMapping("/{course}/parts/{coursePart}/edit")
-//    public String editCoursePartPage(
-//            @PathVariable Course course,
-//            @PathVariable CoursePart coursePart,
-//            Model model
-//    ){
-//        model.addAttribute("url", "/my-courses/" + course.getId() + "/parts/" + coursePart.getId() + "/edit");
-//        return "courseDetailed";
-//    }
-//
-//    @PostMapping("/{course}/parts/{coursePart}/edit")
-//    public String editCoursePart(
-//            @PathVariable Course course,
-//            @Valid CoursePart coursePart, BindingResult bindingResult,
-//            @AuthenticationPrincipal User user, Model model,
-//            @RequestParam(defaultValue = "none") String alert
-//    ) throws IOException {
-//        if (user == null)
-//            return "redirect:/";
-//
-//        model.addAttribute("url", "/my-courses/" + course.getId() + "/parts/" + coursePart.getId() + "/edit");
-//        model.addAttribute("alert", alert);
-//
-//        if (bindingResult.hasErrors()) {
-//            Map<String, String> bindErrors = ControllerUtils.getErrors(bindingResult);
-//            model.mergeAttributes(bindErrors);
-//            return "courseDetailed";
-//        }
-//
-//        Map<String, String> serviceResult = coursePartService.editCoursePart(coursePart);
-//
-//        if (!serviceResult.isEmpty()) {
-//            model.mergeAttributes(serviceResult);
-//            return "courseDetailed";
-//        }
-//
-//        return "redirect:/my-courses/" + course.getId() + "/parts/" + coursePart.getId();
-//    }
-//
-//    @PostMapping("/{course}/parts/{coursePart}/del")
-//    public String deleteCoursePart(
-//            @PathVariable Course course,
-//            @PathVariable CoursePart coursePart,
-//            @AuthenticationPrincipal User user, Model model,
-//            @RequestParam(defaultValue = "none") String alert
-//    ) throws IOException {
-//        if (user == null)
-//            return "redirect:/";
-//
-//        model.addAttribute("url", "/my-courses/" + course.getId() + "/parts/" + coursePart.getId() + "/del");
-//        model.addAttribute("alert", alert);
-//
-//        Map<String, String> serviceResult = coursePartService.deleteCoursePart(coursePart);
-//
-//        if (!serviceResult.isEmpty()) {
-//            model.mergeAttributes(serviceResult);
-//            return "coursePartDetailed";
-//        }
-//
-//        return "redirect:/my-courses/" + course.getId() + "/parts";
-//    }
 
 
 
