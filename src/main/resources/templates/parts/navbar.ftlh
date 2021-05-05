@@ -30,6 +30,12 @@
                 <a class="nav-link" href="/profile">Profile</a>
             </li>
             </#if>
+            <li class="nav-item">
+                <a class="nav-link" href="/contacts">Contacts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
         </ul>
 
         <div class="navbar-text mr-3"><#if user?? && name != "unknown">${name}<#else>Please, login</#if></div>

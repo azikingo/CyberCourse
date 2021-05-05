@@ -51,6 +51,16 @@ public class MainController {
 //        return "redirect:/course";
     }
 
+    @GetMapping("/contacts")
+    public String getContactsPage() {
+            return "contacts";
+    }
+
+    @GetMapping("/about")
+    public String getAboutPage() {
+            return "about";
+    }
+
     @GetMapping("/course")
     public String getCourse(
             @AuthenticationPrincipal User user,
