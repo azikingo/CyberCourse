@@ -12,9 +12,9 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
-                    <#list courses as course>
+                    <#list listCourses as course>
                         <div class="carousel-item ${(course.id == 1)?then("active", "")}">
-                            <img class="d-block w-100" src="/img/${course.photoPath!''}" alt="Course Image">
+                            <img class="d-block w-100" style="width: 100%" src="/img/${course.photoPath!''}" alt="Course Image">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>${course.titleKz!''}</h5>
                                 <p>${course.descriptionKz!''}</p>
@@ -37,7 +37,15 @@
 <div class="col-lg-12 col-12" style="background: aliceblue">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-12 col-12 mt-5"><h4>My last actions</h4></div>
+            <div class="col-lg-12 col-12 mt-5"><h4>
+                    <#if .locale = 'kz'>
+                        Менің соңғы әрекеттерім
+                    <#elseIf .locale = 'ru'>
+                        Мои недавние действия
+                    <#else>
+                        My last actions
+                    </#if>
+                </h4></div>
             <div class="col-lg-12 col-12 m-2"><p style="margin-left: 5px">INCOMPLETE COURSES</p></div>
             <div class="shadow p-3 mb-5 bg-white rounded">
                 <div class="row">
