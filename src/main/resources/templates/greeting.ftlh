@@ -29,7 +29,15 @@
 <div class="col-lg-12 col-12" style="background: aliceblue">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-12 col-12 mt-5"><h4>My last actions</h4></div>
+            <div class="col-lg-12 col-12 mt-5"><h4>
+                    <#if .locale = 'kz'>
+                        Менің соңғы әрекеттерім
+                    <#elseIf .locale = 'ru'>
+                        Мои недавние действия
+                    <#else>
+                        My last actions
+                    </#if>
+                </h4></div>
             <div class="col-lg-12 col-12 m-2"><p style="margin-left: 5px">INCOMPLETE COURSES</p></div>
             <div class="shadow p-3 mb-5 bg-white rounded">
                 <div class="row">

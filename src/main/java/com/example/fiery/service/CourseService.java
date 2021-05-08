@@ -6,6 +6,8 @@ import com.example.fiery.domain.User;
 import com.example.fiery.repos.CourseRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,13 +38,22 @@ public class CourseService {
             return courseRepo.getAllActiveCoursesForStudentByFilterAndCategory(filter, category, user);
     }
 
-    public List<Course> getAllActiveCourses(String filter, Category category) {
+    public Page<Course> getAllActiveCourses(String filter, Category category, Pageable pageable) {
         if(filter == null && category == null)
-            return courseRepo.getAllActiveCourses();
+            return courseRepo.getAllActiveCourses(pageable);
         else if(category == null)
-            return courseRepo.getAllActiveCoursesByFilter(filter);
+            return courseRepo.getAllActiveCoursesByFilter(filter, pageable);
         else
-            return courseRepo.getAllActiveCoursesByFilterAndCategory(filter, category);
+            return courseRepo.getAllActiveCoursesByFilterAndCategory(filter, category, pageable);
+    }
+
+    public List<Course> getListAllActiveCourses(String filter, Category category) {
+        if(filter == null && category == null)
+            return courseRepo.getListAllActiveCourses();
+        else if(category == null)
+            return courseRepo.getListAllActiveCoursesByFilter(filter);
+        else
+            return courseRepo.getListAllActiveCoursesByFilterAndCategory(filter, category);
     }
 
     public Map<String, String> addCourse(Course course, MultipartFile file) throws IOException {

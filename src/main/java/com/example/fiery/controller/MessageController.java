@@ -60,7 +60,7 @@ public class MessageController {
         model.addAttribute("page", page);
         model.addAttribute("url", "/main");
         model.addAttribute("filter", filter);
-        return "main";
+        return "mainCourses";
     }
 //    Method for posting, to save user's message (gets all parameters from form)
     @PostMapping("/main")
