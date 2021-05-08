@@ -13,11 +13,51 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js" integrity="sha512-G3jAqT2eM4MMkLMyQR5YBhvN5/Da3IG6kqgYqU9zlIH4+2a+GuMdLb5Kpxy6ItMdCfgaKlo2XFhI0dHtMJjoRw==" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <style>
         .turbolinks-progress-bar {
             height: 2px;
             background-color: navy;
+        }
+        #contact{
+            background-color:#f1f1f1;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        #contact .well{
+            margin-top:30px;
+            border-radius:0;
+        }
+
+        #contact .form-control{
+            border-radius: 0;
+            border:2px solid #1e1e1e;
+        }
+
+        #contact button{
+            border-radius:0;
+            border:2px solid #1e1e1e;
+        }
+
+        #contact .row{
+            margin-bottom:30px;
+        }
+
+        @media (max-width: 768px) {
+            #contact iframe {
+                margin-bottom: 15px;
+            }
+
+        }
+
+        #footer a{
+            text-decoration: none;
+            color:black;
+        }
+        #footer a:hover{
+            text-decoration: none;
+            color:#007bff;
         }
     </style>
 </head>
