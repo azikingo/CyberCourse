@@ -4,7 +4,7 @@
 <#include "parts/security.ftlh">
 
 <@c.page>
-<div style="background: aliceblue">
+<div class="py-4" style="background: aliceblue">
     <div class="container">
         <#if url == "/course">
             <div class="row">
@@ -60,29 +60,142 @@
                 </div>
                 <div class="col-lg-12 col-12 my-3">
                     <#list course.categories as category>
-                        <em>${category.titleKz!''}<#sep>, </#sep></em>
+                        <a href="/course?selectedCategory=${category.id?c}"><em>${category.titleKz!''}<#sep>, </#sep></em></a>
                     </#list>
                 </div>
-                <div>
-                    <h4><em>${course.price!''} kzt</em></h4>
+                <div class="col-lg-10 col-10 text-right my-3">
+                    <h3><em>${course.price!''} kzt</em></h3>
+                </div>
+                <div class="col-lg-2 col-2 text-right my-3">
+<#--                    <#if isStudent>-->
+                        <a href="/student/my-courses/${course.id?c}/sub" class="btn btn-primary">Subscribe</a>
+<#--                    </#if>-->
+                </div>
+                <div class="col-lg-12 col-12">
                     <p>Course duration: <em>${course.duration!'4h'}</em></p>
+                </div>
+                <div class="col-lg-12 col-12">
                     <p>Course limit: <em>${course.limitTime!'5w'}</em></p>
                 </div>
-                <div>
-                    <p>Parts:</p>
-                    <#assign num = 0>
-                    <#list course.courseParts as coursePart>
-                        <#assign num += 1>
-                        <em>${num}) ${coursePart.titleKz!''}</em><br>
-                    </#list>
+                <div class="col-lg-12 col-12 mt-3">
+                    <hr class="m-0" style="opacity: 80%">
                 </div>
-                <#if isStudent>
-                    <div>
-                        <a href="/student/my-courses/${course.id?c}/sub" class="btn btn-primary">Subscribe</a>
+<#------------------------------------ Course parts ---------------------------------------->
+                <div class="col-lg-12 col-12 text-center my-5">
+                    <h4>Программа курса: что вы изучите</h4>
+                </div>
+                <#assign num = 0>
+                <#list course.courseParts as coursePart>
+                    <#assign num += 1>
+                    <div class="col-lg-2 col-2 text-center">
+                        <h5>Part</h5>
+                        <h1>${num}</h1>
                     </div>
-                </#if>
+                    <div class="col-lg-10 col-10">
+                        <p><i class="far fa-clock text-warning"></i> 1 ч. на завершение</p>
+                        <h4>Part ${num}: ${coursePart.titleKz!''}</h4>
+                        <h5>${coursePart.descriptionKz!''}</h5>
+                    </div>
+                    <div class="col-lg-2 col-2 my-4">
+                    </div>
+                    <#sep>
+                        <div class="col-lg-10 col-10 my-4">
+                            <hr class="m-0" style="opacity: 80%">
+                        </div>
+                    </#sep>
+                </#list>
+                <div class="col-lg-12 col-12 mt-3">
+                    <hr class="m-0" style="opacity: 80%">
+                </div>
+<#------------------------------------ Course review ---------------------------------------->
+                <div class="col-lg-12 col-12 my-5">
+                    <h1><b>4.1</b></h1>
+                    <h3>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star"></span>
+                    </h3>
+                    <small style="margin-left: 3em">2 119 оценки</small>
+                </div>
+                <div class="col-lg-12 col-12 my-4">
+                    <hr class="m-0" style="opacity: 80%">
+                </div>
+
+                <div class="col-lg-6 col-6 my-2">
+                    <small>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                    </small>
+                    <p>автор: <b>Arman</b> • МАЙ 7-ГО 2021</p>
+                    <p>Entertaining and interesting subject. This course gives us a perfect overview of mountains' importance on our environment and their value to our lives as a human. Thank you for this incredible course.</p>
+                </div>
+                <div class="col-lg-6 col-6 my-2">
+                    <small>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                    </small>
+                    <p>автор: <b>Doszhan</b> • МАЙ 7-ГО 2021</p>
+                    <p>So interesting! So well made, every lesson is thought out the interactive mountain map was a joy to complete each time! Incredibly thoughtful and sensitive to every aspect that touches the mountains.</p>
+                </div>
+                <div class="col-lg-6 col-6 my-2">
+                    <small>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                    </small>
+                    <p>автор: <b>Zhomart</b> • МАЙ 5-ГО 2021</p>
+                    <p>Incredibly well-produced set of videos that are highly educational, well-rounded, beautiful, and interesting. I hope it leaves you wanting to both visit and protect these places, as it did for me.</p>
+                </div>
+                <div class="col-lg-6 col-6 my-2">
+                    <small>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                        <span class="fa fa-star" style="color: orange"></span>
+                    </small>
+                    <p>автор: <b>Quralai</b> • МАЙ 4-ГО 2021</p>
+                    <p>Entertaining and interesting subject. This course gives us a perfect overview of mountains' importance on our environment and their value to our lives as a human. Thank you for this incredible course.</p>
+                </div>
+                <div class="col-lg-12 col-12 my-4">
+                    <hr class="m-0" style="opacity: 80%">
+                </div>
+
+                <div class="col-lg-12 col-12 my-4">
+                    <h4>Teachers</h4>
+                </div>
+                <div class="col-lg-2 col-2 my-4">
+                    <img class="rounded-circle z-depth-2" style="width: 8em;height: 8em;" alt="100x100" src="https://www.young-enterprise.org.uk/wp-content/uploads/2019/01/iStock-975814072-edited-aspect-ratio-1x1-4.jpg"
+                         data-holder-rendered="true">
+                </div>
+                <div class="col-lg-4 col-4 my-5">
+                    <h5>Nogay Nursultan</h5>
+                    <h6>Toksik</h6>
+                    <p>CS GO courses</p>
+                </div>
+                <div class="col-lg-2 col-2 my-4">
+                    <img class="rounded-circle z-depth-2" style="width: 8em;height: 8em;" alt="100x100" src="https://www.abc.net.au/cm/rimage/12257292-1x1-xlarge.jpg?v=3"
+                         data-holder-rendered="true">
+                </div>
+                <div class="col-lg-4 col-4 my-5">
+                    <h5>Nagashybayev Zhansultan</h5>
+                    <h6>Strateg</h6>
+                    <p>Brawl Star courses</p>
+                </div>
+
             </div>
         </#if>
     </div>
 </div>
+<#include "parts/footer.ftlh">
 </@c.page>

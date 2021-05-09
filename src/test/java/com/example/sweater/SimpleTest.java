@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class SimpleTest {
-    @Test
+//    @Test
     public void test(){
         int x = 2;
         int y = 23;
@@ -13,7 +13,7 @@ public class SimpleTest {
         Assertions.assertEquals(25,x + y);
     }
 
-    @Test
+//    @Test
     public void error(){
         int i = 0;
         int il = 1 / i;
