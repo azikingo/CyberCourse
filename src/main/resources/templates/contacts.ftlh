@@ -11,7 +11,13 @@
     <div class="container">
         <div class="well well-sm">
             <br /><br />
-            <h3><strong>Contact Us</strong></h3>
+            <h3><strong><#if .locale = 'kz'>
+                        Бізбен хабарасыныз
+                    <#elseIf .locale = 'ru'>
+                        Свяжитесь с нами
+                    <#else>
+                        Contact us
+                    </#if></strong></h3>
         </div>
 
         <div class="row">
@@ -20,7 +26,15 @@
             </div>
 
             <div class="col-md-5">
-                <h4><strong>Get in Touch</strong></h4>
+                <h4><strong>
+                        <#if .locale = 'kz'>
+                            Байланысу
+                        <#elseIf .locale = 'ru'>
+                            Связаться
+                        <#else>
+                            Get in touch
+                        </#if>
+                    </strong></h4>
                 <form>
                     <div class="form-group">
                         <input type="text" class="form-control" name="" value="" placeholder="Name">
@@ -35,7 +49,13 @@
                         <textarea class="form-control" name="" rows="3" placeholder="Message"></textarea>
                     </div>
                     <button class="btn btn-default" type="submit" name="button">
-                        <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit
+                        <i class="fa fa-paper-plane-o" aria-hidden="true"></i> <#if .locale = 'kz'>
+                            Жіберу
+                        <#elseIf .locale = 'ru'>
+                            Отправить
+                        <#else>
+                            Submit
+                        </#if>
                     </button>
                 </form>
             </div>

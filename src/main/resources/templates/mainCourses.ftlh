@@ -21,7 +21,13 @@
                                 </#list>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary ml-1">Search</button>
+                        <button type="submit" class="btn btn-primary ml-1"><#if .locale = 'kz'>
+                                Іздеу
+                            <#elseIf .locale = 'ru'>
+                                Пойск
+                            <#else>
+                                Search
+                            </#if></button>
                     </form>
                 </div>
             </div>
@@ -37,11 +43,23 @@
                                     <em class="card-text">${course.price!''} kzt</em>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="${url}/${course.id?c}" class="btn btn-primary">Толығырақ</a>
+                                    <a href="${url}/${course.id?c}" class="btn btn-primary"><#if .locale = 'kz'>
+                                            Толығырақ
+                                        <#elseIf .locale = 'ru'>
+                                         Подробнее
+                                        <#else>
+                                            Read More
+                                        </#if></a>
                                 </div>
                             </div>
                         <#else>
-                            Курс тіркелмеген
+                            <#if .locale = 'kz'>
+                               Курс Тіркелмеген
+                            <#elseIf .locale = 'ru'>
+                                Курс не зарегестрирован
+                            <#else>
+                                Course not registered
+                            </#if>
                         </#list>
                     </div>
                 <@p.pager url courses />
@@ -78,7 +96,13 @@
                 </div>
                 <#if isStudent>
                     <div>
-                        <a href="/student/my-courses/${course.id?c}/sub" class="btn btn-primary">Subscribe</a>
+                        <a href="/student/my-courses/${course.id?c}/sub" class="btn btn-primary"><#if .locale = 'kz'>
+                                Тіркелу
+                            <#elseIf .locale = 'ru'>
+                                Подписаться
+                            <#else>
+                                Subscribe
+                            </#if></a>
                     </div>
                 </#if>
             </div>

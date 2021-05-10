@@ -8,16 +8,34 @@
                 <div id="areaOne">
                     <a href="#" class="list-group-item list-group-item-action"
                        data-toggle="collapse" data-target="#menuOne" aria-expanded="true" aria-controls="menuOne">
-                        Course
+                        <#if .locale = 'kz'>
+                            Курс
+                        <#elseIf .locale = 'ru'>
+                            Курс
+                        <#else>
+                            Course
+                        </#if>
                     </a>
                 </div>
                 <div id="menuOne" class="collapse" aria-labelledby="areaOne" data-parent="#accordion">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a href="/my-courses" style="text-decoration: none; margin: 1em">My courses</a>
+                            <a href="/my-courses" style="text-decoration: none; margin: 1em"><#if .locale = 'kz'>
+                                    Менің курстарым
+                                <#elseIf .locale = 'ru'>
+                                    Мой курсы
+                                <#else>
+                                    My courses
+                                </#if></a>
                         </li>
                         <li class="list-group-item">
-                            <a href="/my-courses/add" style="text-decoration: none; margin: 1em">Add new course</a>
+                            <a href="/my-courses/add" style="text-decoration: none; margin: 1em"><#if .locale = 'kz'>
+                                    Жаңа курс қосу
+                                <#elseIf .locale = 'ru'>
+                                    Добавиь новый курс
+                                <#else>
+                                    Add new course
+                                </#if></a>
                         </li>
                     </ul>
                 </div>
@@ -54,19 +72,43 @@
                             <em class="card-text">${course.price!''} kzt</em>
                         </div>
                         <div class="card-footer">
-                            <a href="${url}/${course.id?c}" class="btn btn-primary">Толығырақ</a>
+                            <a href="${url}/${course.id?c}" class="btn btn-primary"><#if .locale = 'kz'>
+                                    Толығырақ
+                                <#elseIf .locale = 'ru'>
+                                    Подробнее
+                                <#else>
+                                    Read More
+                                </#if></a>
                         </div>
                     </div>
                 <#else>
-                    Курс тіркелмеген
+                    <#if .locale = 'kz'>
+                        Курс тіркелмеген
+                    <#elseIf .locale = 'ru'>
+                        Курс незарегестрирован
+                    <#else>
+                        Course unregistered
+                    </#if>
                 </#list>
             </div>
         <#elseif url == "/my-courses/add" || url?contains("/edit")>
             <div class="text-info text-center mx-1 mb-2">
                 <#if url == "/my-courses/add">
-                    Жаңа курс енгізу
+                    <#if .locale = 'kz'>
+                        Жаңа курс енгізу
+                    <#elseIf .locale = 'ru'>
+                        Добавить новый курс
+                    <#else>
+                        Add new course
+                    </#if>
                 <#else>
-                    &#8220;${course.titleKz!''}&#8221; курсын өзгерту
+                    &#8220;${course.titleKz!''}&#8221; <#if .locale = 'kz'>
+                    Курсын озгерту
+                <#elseIf .locale = 'ru'>
+                    Изменить курс
+                <#else>
+                    Change course
+                </#if>
                 </#if>
             </div>
             <div class="form-group mt-3">
@@ -148,7 +190,13 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-6 col-form-label">
-                            Категория
+                            <#if .locale = 'kz'>
+                               Категория
+                            <#elseIf .locale = 'ru'>
+                                Категория
+                            <#else>
+                                Category
+                            </#if>
                         </label>
                         <div class="col-sm-10">
                             <select class="selectpicker form-control"
@@ -171,7 +219,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Бағасы
+                            <#if .locale = 'kz'>
+                                * Бағасы
+                            <#elseIf .locale = 'ru'>
+                                * Цена
+                            <#else>
+                                * Price
+                            </#if>
                         </label>
                         <input type="number" class="form-control"
                                value="<#if course??>${course.price?c}</#if>" name="price" placeholder="Course price" />
@@ -200,13 +254,25 @@
 <#--                        </#if>-->
                         <div class="custom-file">
                             <input type="file" name="file" id="customFile">
-                            <label class="custom-file-label" for="customFile"><#if course??>${course.photoPath!''}<#else>Course photo</#if></label>
+                            <label class="custom-file-label" for="customFile"><#if course??>${course.photoPath!''}<#else><#if .locale = 'kz'>
+                                    Курс суреті
+                                <#elseIf .locale = 'ru'>
+                                    Фото курса
+                                <#else>
+                                    Course photo
+                                </#if></#if></label>
                         </div>
                     </div>
                     <input type="hidden" name="_csrf" value="${_csrf.token}" />
                     <input type="hidden" name="id" value="<#if course??>${course.id}</#if>" />
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary"><#if url == "/my-courses/add">Add<#else>Save</#if></button>
+                        <button type="submit" class="btn btn-primary"><#if url == "/my-courses/add">Add<#else><#if .locale = 'kz'>
+                                Сақтау
+                            <#elseIf .locale = 'ru'>
+                                Сохранить
+                            <#else>
+                                Save
+                            </#if></#if></button>
                     </div>
                 </form>
             </div>
@@ -225,8 +291,20 @@
                     <p>Course limit: <em>${course.limitTime!'5w'}</em></p>
                 </div>
                 <div>
-                    <a href="${url}/parts" class="btn btn-primary">Parts</a>
-                    <a href="${url}/edit" class="btn btn-primary">Edit course</a>
+                    <a href="${url}/parts" class="btn btn-primary"><#if .locale = 'kz'>
+                            Бөліктері
+                        <#elseIf .locale = 'ru'>
+                            Части
+                        <#else>
+                            Parts
+                        </#if></a>
+                    <a href="${url}/edit" class="btn btn-primary"><#if .locale = 'kz'>
+                            Курсты редакциялау
+                        <#elseIf .locale = 'ru'>
+                            Редактировать курс
+                        <#else>
+                            Edit course
+                        </#if></a>
                     <#--------------------------------------Delete modal---------------------------------------->
                     <a href="#" class="btn btn-danger" data-toggle="modal"
                        data-target="#del${course.id?c}">Delete course</a>
@@ -237,25 +315,48 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title">
-                                        Сенімдісіз бе?
+                                        <#if .locale = 'kz'>
+                                           Сенімдісіз бе?
+                                        <#elseIf .locale = 'ru'>
+                                            Вы уверены?
+                                        <#else>
+                                            Are you sure?
+                                        </#if>
                                     </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Сіз &#8220;${course.getTitleKz()}&#8221; курсын
-                                        жойғалы жатырсыз. Келісесіз бе?</p>
+                                    <p> <#if .locale = 'kz'>
+                                            Сіз &#8220;${course.getTitleKz()}&#8221; курсын  жойғалы жатырсыз. Келісесіз бе?
+                                        <#elseIf .locale = 'ru'>
+                                            вы хотите отменить курс &#8220;${course.getTitleKz()}&#8221;. Согласны?
+                                        <#else>
+                                            you're going to delete &#8220;${course.getTitleKz()}&#8221; the course. Do you agree?
+                                        </#if></p>
                                 </div>
                                 <div class="modal-footer">
                                     <form class="form-inline" action="${url}/del" method="post">
                                         <input type="hidden" name="courseId" value="${course.getId()?c}"/>
                                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                         <button type="submit" class="btn btn-success btn-sm px-3 mr-1">
-                                            Иә
+                                            <#if .locale = 'kz'>
+                                                Иә
+                                            <#elseIf .locale = 'ru'>
+                                                Да
+                                            <#else>
+                                                Yes
+                                            </#if>
                                         </button>
                                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
-                                            Жоқ
+                                            <#if .locale = 'kz'>
+                                                Жоқ
+                                            <#elseIf .locale = 'ru'>
+                                                Нет
+                                            <#else>
+                                                No
+                                            </#if>
                                         </button>
                                     </form>
                                 </div>
@@ -303,7 +404,13 @@
                                         <div class="modal-dialog modal-lg modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Өзгертіп сақтау</h5>
+                                                    <h5 class="modal-title"><#if .locale = 'kz'>
+                                                           Өзгертіп сақтау
+                                                        <#elseIf .locale = 'ru'>
+                                                            Изменить и сохранить
+                                                        <#else>
+                                                            Edit and save
+                                                        </#if></h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -370,25 +477,48 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">
+                                                        <#if .locale = 'kz'>
                                                             Сенімдісіз бе?
+                                                        <#elseIf .locale = 'ru'>
+                                                            Вы уверены?
+                                                        <#else>
+                                                            Are you sure?
+                                                        </#if>
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                        <p>Сіз &#8220;${category.getTitleKz()}&#8221; категориясын
-                                                            жойғалы жатырсыз. Келісесіз бе?</p>
+                                                    <#if .locale = 'kz'>
+                                                        Сіз &#8220;${course.getTitleKz()}&#8221; курсын  жойғалы жатырсыз. Келісесіз бе?
+                                                    <#elseIf .locale = 'ru'>
+                                                        вы хотите отменить курс &#8220;${course.getTitleKz()}&#8221;. Согласны?
+                                                    <#else>
+                                                        you're going to delete &#8220;${course.getTitleKz()}&#8221; the course. Do you agree?
+                                                    </#if>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <form class="form-inline" action="${url}/delete" method="post">
                                                         <input type="hidden" name="id" value="${category.getId()?c}"/>
                                                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                                         <button type="submit" class="btn btn-success btn-sm px-3 mr-1">
-                                                            Иә
+                                                            <#if .locale = 'kz'>
+                                                                Иә
+                                                            <#elseIf .locale = 'ru'>
+                                                                Да
+                                                            <#else>
+                                                                Yes
+                                                            </#if>
                                                         </button>
                                                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
-                                                            Жоқ
+                                                            <#if .locale = 'kz'>
+                                                               Жоқ
+                                                            <#elseIf .locale = 'ru'>
+                                                                Нет
+                                                            <#else>
+                                                                No
+                                                            </#if>
                                                         </button>
                                                     </form>
                                                 </div>
@@ -434,7 +564,13 @@
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary"><#if .locale = 'kz'>
+                               Енгізу
+                            <#elseIf .locale = 'ru'>
+                                Добавить
+                            <#else>
+                                Add
+                            </#if></button>
                     </div>
                 </form>
             </div>

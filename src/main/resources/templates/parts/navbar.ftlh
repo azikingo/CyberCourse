@@ -12,7 +12,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="/"><#if .locale = 'kz'>
+                        Басты Бет
+                    <#elseIf .locale = 'ru'>
+                        Главная
+                    <#else>
+                       Home
+                    </#if></a>
             </li>
 <#--            <#if isAdmin>-->
 <#--            <li class="nav-item">-->
@@ -20,21 +26,51 @@
 <#--            </li>-->
 <#--            </#if>-->
             <li class="nav-item">
-                <a class="nav-link" href="/course">Courses</a>
+                <a class="nav-link" href="/course"><#if .locale = 'kz'>
+                        Курстар
+                    <#elseIf .locale = 'ru'>
+                        Курсы
+                    <#else>
+                        Courses
+                    </#if></a>
             </li>
             <#if user?? && name != "unknown">
                 <li class="nav-item">
-                    <a class="nav-link" href="${isStudent?then("/student","")}/my-courses">My courses</a>
+                    <a class="nav-link" href="${isStudent?then("/student","")}/my-courses"><#if .locale = 'kz'>
+                            Менің Курстарым
+                        <#elseIf .locale = 'ru'>
+                            Мои Курсы
+                        <#else>
+                            My Courses
+                        </#if></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile">Profile</a>
+                    <a class="nav-link" href="/profile"><#if .locale = 'kz'>
+                            Профиль
+                        <#elseIf .locale = 'ru'>
+                            Профиль
+                        <#else>
+                            Profile
+                        </#if></a>
                 </li>
             </#if>
             <li class="nav-item">
-                <a class="nav-link" href="/contacts">Contacts</a>
+                <a class="nav-link" href="/contacts"><#if .locale = 'kz'>
+                       Байланыстар
+                    <#elseIf .locale = 'ru'>
+                        Контакты
+                    <#else>
+                        Contacts
+                    </#if></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/about">About</a>
+                <a class="nav-link" href="/about"><#if .locale = 'kz'>
+                        Біз туралы
+                    <#elseIf .locale = 'ru'>
+                        О нас
+                    <#else>
+                        About us
+                    </#if></a>
             </li>
         </ul>
 
@@ -56,7 +92,13 @@
                 </div>
             </li>
         </ul>
-        <div class="navbar-text mr-3"><#if user?? && name != "unknown">${name}<#else>Please, login</#if></div>
+        <div class="navbar-text mr-3"><#if user?? && name != "unknown">${name}<#else>                    <#if .locale = 'kz'>
+                Тіркеліңіз
+            <#elseIf .locale = 'ru'>
+                Зарегестрируйтесь
+            <#else>
+               Please,login
+            </#if></#if></div>
         <@l.logout user??/>
     </div>
 </nav>

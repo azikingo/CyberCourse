@@ -8,38 +8,80 @@
                     <div id="areaOne">
                         <a href="#" class="list-group-item list-group-item-action"
                            data-toggle="collapse" data-target="#menuOne" aria-expanded="true" aria-controls="menuOne">
-                            Course
+                            <#if .locale = 'kz'>
+                                Курс
+                            <#elseIf .locale = 'ru'>
+                                Курс
+                            <#else>
+                               Course
+                            </#if>
                         </a>
                     </div>
                     <div id="menuOne" class="collapse" aria-labelledby="areaOne" data-parent="#accordion">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <a href="/my-courses" style="text-decoration: none; margin: 1em">Courses</a>
+                                <a href="/my-courses" style="text-decoration: none; margin: 1em"><#if .locale = 'kz'>
+                                       Курстар
+                                    <#elseIf .locale = 'ru'>
+                                        Курсы
+                                    <#else>
+                                        Courses
+                                    </#if></a>
                             </li>
                             <li class="list-group-item">
-                                <a href="/my-courses/addCourse" style="text-decoration: none; margin: 1em">Add new course</a>
+                                <a href="/my-courses/addCourse" style="text-decoration: none; margin: 1em"><#if .locale = 'kz'>
+                                       Жаңа курс қосу
+                                    <#elseIf .locale = 'ru'>
+                                        Добавить новый курс
+                                    <#else>
+                                        Add new course
+                                    </#if></a>
                             </li>
                         </ul>
                     </div>
                     <div id="areaTwo">
                         <a href="#" class="list-group-item list-group-item-action"
                            data-toggle="collapse" data-target="#menuTwo" aria-expanded="true" aria-controls="menuTwo">
-                            Course part
+                            <#if .locale = 'kz'>
+                                Курс бөлігі
+                            <#elseIf .locale = 'ru'>
+                                Часть курса
+                            <#else>
+                                Course part
+                            </#if>
                         </a>
                     </div>
                     <div id="menuTwo" class="collapse" aria-labelledby="areaTwo" data-parent="#accordion">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <a href="/my-courses/${course.id?c}/parts" style="text-decoration: none; margin: 1em">Course parts</a>
+                                <a href="/my-courses/${course.id?c}/parts" style="text-decoration: none; margin: 1em"><#if .locale = 'kz'>
+                                        Курс бөлігтері
+                                    <#elseIf .locale = 'ru'>
+                                        Части курса
+                                    <#else>
+                                        Course parts
+                                    </#if></a>
                             </li>
                             <li class="list-group-item">
-                                <a href="/my-courses/${course.id?c}/addPart" style="text-decoration: none; margin: 1em">Add new course part</a>
+                                <a href="/my-courses/${course.id?c}/addPart" style="text-decoration: none; margin: 1em"><#if .locale = 'kz'>
+                                        Жаңа курс бөлігін қосу
+                                    <#elseIf .locale = 'ru'>
+                                        Добавить часть курса
+                                    <#else>
+                                        Add course part
+                                    </#if></a>
                             </li>
                         </ul>
                     </div>
                     <div id="areaFour">
                         <a href="/my-courses/${course.id?c}/parts/${coursePart.id?c}/quiz" class="list-group-item list-group-item-action">
-                            Course part quiz
+                            <#if .locale = 'kz'>
+                                Курс бөлігінен тест
+                            <#elseIf .locale = 'ru'>
+                                Тест по части курса
+                            <#else>
+                                Course part quiz
+                            </#if>
                         </a>
                     </div>
                 </div>
@@ -52,9 +94,21 @@
                 <div class="form-group mt-3">
                     <div class="text-info text-center mx-1 mb-2">
                         <#if url?contains("/addQuestion")>
-                            Жаңа сұрақ енгізу
+                            <#if .locale = 'kz'>
+                                Жаңа сұрақ енгізу
+                            <#elseIf .locale = 'ru'>
+                                Добавить новый вопрос
+                            <#else>
+                                Add new question
+                            </#if>
                         <#else>
-                            &#8220;${quizQuestion.textKz!''}&#8221; сұрағын өзгерту
+                            &#8220;${quizQuestion.textKz!''}&#8221; <#if .locale = 'kz'>
+                            Сұрағын өзгерту
+                        <#elseIf .locale = 'ru'>
+                            Изменить вопрос
+                        <#else>
+                            Change question
+                        </#if>
                         </#if>
                     </div>
                     <form method="post">
@@ -117,10 +171,27 @@
                             </label>
                         </div>
                     <#else>
-                        Жауаптар енгізілмеген
+                        <#if .locale = 'kz'>
+                            Жауаптар енгізілмеген
+                        <#elseIf .locale = 'ru'>
+                            Ответы не добавлены
+                        <#else>Answers not added
+                        </#if>
                     </#list>
-                    <a class="btn btn-primary" href="${url}/addAnswer" role="button">Add answer</a>
-                    <button type="submit" class="btn btn-success">Save</button>
+                    <a class="btn btn-primary" href="${url}/addAnswer" role="button"><#if .locale = 'kz'>
+                            Жауар қосу
+                        <#elseIf .locale = 'ru'>
+                            Добавить ответ
+                        <#else>
+                            Add answer
+                        </#if></a>
+                    <button type="submit" class="btn btn-success"><#if .locale = 'kz'>
+                            Сақтау
+                        <#elseIf .locale = 'ru'>
+                            Сохранить
+                        <#else>
+                            Save
+                        </#if></button>
                 </form>
             <#elseif url?contains("/quiz")>
                 <#if quiz??>
@@ -142,25 +213,48 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title">
-                                        Сенімдісіз бе?
+                                        <#if .locale = 'kz'>
+                                            Сенімдісіз бе?
+                                        <#elseIf .locale = 'ru'>
+                                            Вы уверены?
+                                        <#else>
+                                            Are you sure?
+                                        </#if>
                                     </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Сіз &#8220;${quiz.getTitleKz()}&#8221; емтиханын
-                                        жойғалы жатырсыз. Келісесіз бе?</p>
+                                    <p>Сіз &#8220;${quiz.getTitleKz()}&#8221; <#if .locale = 'kz'>
+                                            емтиханын жойғалы жатырсыз. Келісесіз бе?
+                                        <#elseIf .locale = 'ru'>
+                                            вы собираетесь отменить свой экзамен. Согласны?
+                                        <#else>
+                                            you're going to cancel your exam. Do you agree?
+                                        </#if></p>
                                 </div>
                                 <div class="modal-footer">
                                     <form class="form-inline" action="${url}/del" method="post">
                                         <input type="hidden" name="quizId" value="${quiz.getId()?c}"/>
                                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                         <button type="submit" class="btn btn-success btn-sm px-3 mr-1">
-                                            Иә
+                                            <#if .locale = 'kz'>
+                                                Иә
+                                            <#elseIf .locale = 'ru'>
+                                                Да
+                                            <#else>
+                                                Yes
+                                            </#if>
                                         </button>
                                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
-                                            Жоқ
+                                            <#if .locale = 'kz'>
+                                                Жоқ
+                                            <#elseIf .locale = 'ru'>
+                                                Нет
+                                            <#else>
+                                                No
+                                            </#if>
                                         </button>
                                     </form>
                                 </div>
@@ -168,7 +262,13 @@
                         </div>
                     </div>
                 <#else>
-                    <a class="btn btn-primary" href="/my-courses/${course.id?c}/parts/${coursePart.id?c}/quiz/addQuiz" role="button">Add quiz</a>
+                    <a class="btn btn-primary" href="/my-courses/${course.id?c}/parts/${coursePart.id?c}/quiz/addQuiz" role="button"><#if .locale = 'kz'>
+                            Тест қосу
+                        <#elseIf .locale = 'ru'>
+                            Добавить тест
+                        <#else>
+                            Add quiz
+                        </#if></a>
                 </#if>
             <#elseif url?contains("/parts/")>
                 <div class="row">

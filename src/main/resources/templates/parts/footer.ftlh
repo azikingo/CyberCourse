@@ -86,10 +86,22 @@
                 <h6 class="text-uppercase font-weight-bold">Useful links</h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <a href="/contacts">Contacts</a>
+                    <a href="/contacts"><#if .locale = 'kz'>
+                            Байланыстар
+                        <#elseIf .locale = 'ru'>
+                            Контакты
+                        <#else>
+                            Contacts
+                        </#if></a>
                 </p>
                 <p>
-                    <a href="/about">About Us</a>
+                    <a href="/about"><#if .locale = 'kz'>
+                            Біз туралы
+                        <#elseIf .locale = 'ru'>
+                            О Нас
+                        <#else>
+                            About Us
+                        </#if></a>
                 </p>
 
             </div>
@@ -99,7 +111,13 @@
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
 
                 <!-- Links -->
-                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <h6 class="text-uppercase font-weight-bold"><#if .locale = 'kz'>
+                      Бізге хабарласыныз
+                    <#elseIf .locale = 'ru'>
+                        Свяжитесь с нами
+                    <#else>
+                       Contact Us
+                    </#if></h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
                     <i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>

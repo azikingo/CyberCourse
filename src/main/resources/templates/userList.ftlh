@@ -8,8 +8,20 @@
     <table>
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Role</th>
+            <th> <#if .locale = 'kz'>
+                    Аты
+                <#elseIf .locale = 'ru'>
+                    Имя
+                <#else>
+                    Name
+                </#if> </th>
+            <th> <#if .locale = 'kz'>
+                    Рөлі
+                <#elseIf .locale = 'ru'>
+                    Роль
+                <#else>
+                    Role
+                </#if> </th>
             <th></th>
         </tr>
         </thead>
@@ -18,7 +30,13 @@
             <tr>
                 <td>${user.username}</td>
                 <td><#list user.roles as role>${role}<#sep>, </#list></td>
-                <td><a href="/user/${user.id?c}">edit</a></td>
+                <td><a href="/user/${user.id?c}"> <#if .locale = 'kz'>
+                            Енгізу
+                        <#elseIf .locale = 'ru'>
+                            Добавить
+                        <#else>
+                            Edit
+                        </#if> </a></td>
             </tr>
         </#list>
         </tbody>

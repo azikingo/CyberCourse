@@ -14,33 +14,69 @@
                 <div id="menuOne" class="collapse" aria-labelledby="areaOne" data-parent="#accordion">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a href="/my-courses" style="text-decoration: none; margin: 1em">My courses</a>
+                            <a href="/my-courses" style="text-decoration: none; margin: 1em"><#if .locale = 'kz'>
+                                    Менің курстарым
+                                <#elseIf .locale = 'ru'>
+                                    Мой курсы
+                                <#else>
+                                    My courses
+                                </#if></a>
                         </li>
                         <li class="list-group-item">
-                            <a href="/my-courses/add" style="text-decoration: none; margin: 1em">Add new course</a>
+                            <a href="/my-courses/add" style="text-decoration: none; margin: 1em"><#if .locale = 'kz'>
+                                    Жаңа курс қосу
+                                <#elseIf .locale = 'ru'>
+                                    Добавить новый курс
+                                <#else>
+                                    Add New Course
+                                </#if></a>
                         </li>
                     </ul>
                 </div>
                 <div id="areaTwo">
                     <a href="#" class="list-group-item list-group-item-action"
                        data-toggle="collapse" data-target="#menuTwo" aria-expanded="true" aria-controls="menuTwo">
-                        Course part
+                        <#if .locale = 'kz'>
+                            Курстың бөлігі
+                        <#elseIf .locale = 'ru'>
+                            Часть курса
+                        <#else>
+                            Course part
+                        </#if>
                     </a>
                 </div>
                 <div id="menuTwo" class="collapse" aria-labelledby="areaTwo" data-parent="#accordion">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a href="/my-courses/${course.id?c}/parts" style="text-decoration: none; margin: 1em">Course parts</a>
+                            <a href="/my-courses/${course.id?c}/parts" style="text-decoration: none; margin: 1em"><#if .locale = 'kz'>
+                                    Курстың бөлігтері
+                                <#elseIf .locale = 'ru'>
+                                    Части курса
+                                <#else>
+                                    Course parts
+                                </#if></a>
                         </li>
                         <li class="list-group-item">
-                            <a href="/my-courses/${course.id?c}/parts/add" style="text-decoration: none; margin: 1em">Add new course part</a>
+                            <a href="/my-courses/${course.id?c}/parts/add" style="text-decoration: none; margin: 1em"><#if .locale = 'kz'>
+                                    Курстың бөлігін қосу
+                                <#elseIf .locale = 'ru'>
+                                    Добавить часть курса
+                                <#else>
+                                    Add course part
+                                </#if></a>
                         </li>
                     </ul>
                 </div>
                 <#if url?contains("/parts/") && !url?contains("/parts/add")>
                     <div id="areaFour">
                         <a href="/my-courses/${course.id?c}/parts/${coursePart.id?c}/quiz" class="list-group-item list-group-item-action">
-                            Course part quiz
+                            <#if .locale = 'kz'>
+                                Курстың бөлігіне тест
+                            <#elseIf .locale = 'ru'>
+                                Тест на часть курса
+                            <#else>
+                                Course part quiz
+                            </#if>
                         </a>
                     </div>
                 </#if>
@@ -53,9 +89,21 @@
         <#if url?contains("/parts/add") || url?contains("/edit")>
             <div class="text-info text-center mx-1 mb-2">
                 <#if url?contains("/parts/add")>
-                    Жаңа бөлім енгізу
+                    <#if .locale = 'kz'>
+                        Жаңа бөлім енгізу
+                    <#elseIf .locale = 'ru'>
+                        Добавить новый раздел
+                    <#else>
+                        Add new section
+                    </#if>
                 <#else>
-                    &#8220;${coursePart.titleKz!''}&#8221; бөлімін өзгерту
+                    &#8220;${coursePart.titleKz!''}&#8221; <#if .locale = 'kz'>
+                    Бөлімін өзгерту
+                <#elseIf .locale = 'ru'>
+                    Изменить раздел
+                <#else>
+                    Change section
+                </#if>
                 </#if>
             </div>
             <div class="form-group mt-3">
