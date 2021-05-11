@@ -25,13 +25,25 @@
             <div class="form-group">
                 <div class="custom-file">
                     <input type="file" name="file" id="customFile">
-                    <label class="custom-file-label" for="customFile">Choose file</label>
+                    <label class="custom-file-label" for="customFile"><#if .locale = 'kz'>
+                            Файлды таңданыз
+                        <#elseIf .locale = 'ru'>
+                            Выберите файл
+                        <#else>
+                            Choose file
+                        </#if></label>
                 </div>
             </div>
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
             <input type="hidden" name="id" value="<#if message??>${message.id}</#if>" />
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="submit" class="btn btn-primary"><#if .locale = 'kz'>
+                        Жіберу
+                    <#elseIf .locale = 'ru'>
+                        Отправить
+                    <#else>
+                        Send
+                    </#if></button>
             </div>
         </form>
     </div>

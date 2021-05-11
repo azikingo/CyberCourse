@@ -91,7 +91,7 @@
                     </#if>
                 </#list>
             </div>
-        <#elseif url == "/my-courses/add" || url?contains("/edit")>
+        <#elseIf url == "/my-courses/add" || url?contains("/edit")>
             <div class="text-info text-center mx-1 mb-2">
                 <#if url == "/my-courses/add">
                     <#if .locale = 'kz'>
@@ -115,7 +115,13 @@
                 <form method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Қазақша атауы
+                            <#if .locale = 'kz'>
+                                * Қазақша атауы
+                            <#elseIf .locale = 'ru'>
+                               * Казахское название
+                            <#else>
+                                * Kazakh name
+                            </#if>
                         </label>
                         <input type="text" class="form-control ${(titleKzError??)?string('is-invalid','')}"
                                value="<#if course??>${course.titleKz!''}</#if>" name="titleKz" placeholder="Course title kz" />
@@ -127,7 +133,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Орысша атауы
+                            <#if .locale = 'kz'>
+                                * Орысша атауы
+                            <#elseIf .locale = 'ru'>
+                                * Русское название
+                            <#else>
+                                * Russian name
+                            </#if>
                         </label>
                         <input type="text" class="form-control ${(titleRuError??)?string('is-invalid','')}"
                                value="<#if course??>${course.titleRu!''}</#if>" name="titleRu" placeholder="Course title ru" />
@@ -139,7 +151,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Ағылшынша атауы
+                            <#if .locale = 'kz'>
+                                * Ағылшынша атауы
+                            <#elseIf .locale = 'ru'>
+                                * Англиское название
+                            <#else>
+                                * English name
+                            </#if>
                         </label>
                         <input type="text" class="form-control ${(titleEnError??)?string('is-invalid','')}"
                                value="<#if course??>${course.titleEn!''}</#if>" name="titleEn" placeholder="Course title en" />
@@ -151,7 +169,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Қазақша түсіндірмесі
+                            <#if .locale = 'kz'>
+                                * Қазақша түсіндірмесі
+                            <#elseIf .locale = 'ru'>
+                                * Описание по-казахский
+                            <#else>
+                                * Kazakh description
+                            </#if>
                         </label>
                         <textarea class="form-control ${(descriptionKzError??)?string('is-invalid', '')}"
                                   id="descriptionKz" name="descriptionKz"
@@ -164,7 +188,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Орысша түсіндірмесі
+                            <#if .locale = 'kz'>
+                                * Орысша түсіндірмесі
+                            <#elseIf .locale = 'ru'>
+                                * Описание по-руский
+                            <#else>
+                                * Russian description
+                            </#if>
                         </label>
                         <textarea class="form-control ${(descriptionRuError??)?string('is-invalid', '')}"
                                   id="descriptionRu" name="descriptionRu"
@@ -177,7 +207,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Ағылшынша түсіндірмесі
+                            <#if .locale = 'kz'>
+                                * Ағылшынша түсіндірмесі
+                            <#elseIf .locale = 'ru'>
+                                * Описание по-англиский
+                            <#else>
+                                * English description
+                            </#if>
                         </label>
                         <textarea class="form-control ${(descriptionEnError??)?string('is-invalid', '')}"
                                   id="descriptionEn" name="descriptionEn"
@@ -276,7 +312,7 @@
                     </div>
                 </form>
             </div>
-        <#elseif url?contains("/my-courses/")>
+        <#elseIf url?contains("/my-courses/")>
             <div class="row">
                 <img class="card-img-top" src="/img/${course.photoPath!''}"
                      style="width: 100%; height: 300px" alt="Course photo">
@@ -372,14 +408,32 @@
 
 
 
-        <#elseif url == "/category">
+        <#elseIf url == "/category">
             <table class="table table-hover">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Қазақша атауы</th>
-                    <th scope="col">Орысша атауы</th>
-                    <th scope="col">Ағылшынша атауы</th>
+                    <th scope="col"> <#if .locale = 'kz'>
+                            * Қазақша атауы
+                        <#elseIf .locale = 'ru'>
+                            * Казахское название
+                        <#else>
+                            * Kazakh name
+                        </#if></th>
+                    <th scope="col"><#if .locale = 'kz'>
+                            * Орысша атауы
+                        <#elseIf .locale = 'ru'>
+                            * Русское название
+                        <#else>
+                            * Russian name
+                        </#if></th>
+                    <th scope="col"><#if .locale = 'kz'>
+                            * Ағылшынша атауы
+                        <#elseIf .locale = 'ru'>
+                            * Англиское название
+                        <#else>
+                            * English name
+                        </#if></th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -420,7 +474,13 @@
                                                           class="">
                                                         <div class="form-group row">
                                                             <label for="editTitleKz" class="col-sm-6 col-form-label">
-                                                                * Қазақша атауы
+                                                                <#if .locale = 'kz'>
+                                                                    * Қазақша атауы
+                                                                <#elseIf .locale = 'ru'>
+                                                                    * Казахское название
+                                                                <#else>
+                                                                    * Kazakh name
+                                                                </#if>
                                                             </label>
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control"
@@ -431,7 +491,13 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="editTitleRu" class="col-sm-6 col-form-label">
-                                                                * Орысша атауы
+                                                                <#if .locale = 'kz'>
+                                                                    * Орысша атауы
+                                                                <#elseIf .locale = 'ru'>
+                                                                    * Русское название
+                                                                <#else>
+                                                                    * Russian name
+                                                                </#if>
                                                             </label>
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control"
@@ -442,7 +508,13 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="editTitleEn" class="col-sm-6 col-form-label">
-                                                                * Ағылшынша атауы
+                                                                <#if .locale = 'kz'>
+                                                                    * Ағылшынша атауы
+                                                                <#elseIf .locale = 'ru'>
+                                                                    * Англиское название
+                                                                <#else>
+                                                                    * English name
+                                                                </#if>
                                                             </label>
                                                             <div class="col-sm-10">
                                                                 <input type="text" class="form-control"
@@ -532,7 +604,7 @@
                 </#list>
                 </tbody>
             </table>
-        <#elseif url == "/addCategory">
+        <#elseIf url == "/addCategory">
             <div class="form-group mt-3">
                 <form method="post">
                     <div class="form-group">

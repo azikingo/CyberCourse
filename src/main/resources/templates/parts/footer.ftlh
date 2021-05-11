@@ -6,7 +6,13 @@
             <div class="row py-4 d-flex justify-content-center">
 
                 <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
-                    <h5 class="mb-0">Get connected with us on social networks!</h5>
+                    <h5 class="mb-0"><#if .locale = 'kz'>
+                            Бізбен әлеуметтік желілерде хабарласыңыз!
+                        <#elseIf .locale = 'ru'>
+                            Свяжитесь с нами в социальных сетях!
+                        <#else>
+                            Get connected with us on social networks!
+                        </#if></h5>
                 </div>
 
             </div>
@@ -22,29 +28,60 @@
 
                 <h6 class="text-uppercase font-weight-bold" style="color: #3b5998;">Fiery</h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>Your one and only source into the scandaluos life of cybersport's elite</p>
+                <p><#if .locale = 'kz'>
+                        Киберспорт элитасының жанжалды өмірі туралы жалғыз ақпарат көзі
+                    <#elseIf .locale = 'ru'>
+                        Ваш единственный источник информации о скандальной жизни элиты киберспорта
+                    <#else>
+                        Your one and only source into the scandaluos life of cybersport's elite
+                    </#if></p>
 
             </div>
 
             <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
-                <h6 class="text-uppercase font-weight-bold" style="color: #3b5998;">Products</h6>
+                <h6 class="text-uppercase font-weight-bold" style="color: #3b5998;"><#if .locale = 'kz'>
+                        Өнімдер
+                    <#elseIf .locale = 'ru'>
+                       Продукты
+                    <#else>
+                        Products
+                    </#if></h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <a class="text-info" href="/student/my-courses">My Courses</a>
+                    <a class="text-info" href="/student/my-courses"><#if .locale = 'kz'>
+                            Менің курстарым
+                        <#elseIf .locale = 'ru'>
+                            Мой Курсы
+                        <#else>
+                            My Courses
+                        </#if></a>
                 </p>
                 <p>
-                    <a class="text-info" href="/course">All Courses</a>
+                    <a class="text-info" href="/course"><#if .locale = 'kz'>
+                            Барлық Курстар
+                        <#elseIf .locale = 'ru'>
+                            Все Курсы
+                        <#else>
+                           All Сourses
+                        </#if></a>
                 </p>
 
             </div>
 
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
 
-                <h6 class="text-uppercase font-weight-bold" style="color: #3b5998;">Useful links</h6>
+                <h6 class="text-uppercase font-weight-bold" style="color: #3b5998;"><#if .locale = 'kz'>
+                        пайдалы сілтемелер
+                    <#elseIf .locale = 'ru'>
+                        полезные ссылки
+                    <#else>
+                        useful links
+                    </#if></h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <a class="text-info" href="/contacts"><#if .locale = 'kz'>
+                    <a class="text-info" href="/contacts">
+                        <#if .locale = 'kz'>
                             Байланыстар
                         <#elseIf .locale = 'ru'>
                             Контакты
@@ -53,8 +90,8 @@
                         </#if></a>
                 </p>
                 <p>
-                    <a class="text-info" href="/about">About Us</a>
-                    <a href="/about"><#if .locale = 'kz'>
+                    <a class="text-info" href="/about">
+                        <#if .locale = 'kz'>
                             Біз туралы
                         <#elseIf .locale = 'ru'>
                             О Нас
@@ -74,7 +111,8 @@
                         Свяжитесь с нами
                     <#else>
                        Contact Us
-                    </#if></h6>
+                    </#if>
+                </h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
                     <i class="fas fa-home mr-3"></i> Qaskelen, Abylai khan 1/1</p>
