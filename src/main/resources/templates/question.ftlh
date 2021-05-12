@@ -138,7 +138,13 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-6 col-form-label">
-                                * Ағылшынша атауы
+                                <#if .locale = 'kz'>
+                                    * Ағылшынша атауы
+                                <#elseIf .locale = 'ru'>
+                                    * Англиское название
+                                <#else>
+                                    * English name
+                                </#if>
                             </label>
                             <input type="text" class="form-control ${(textEnError??)?string('is-invalid','')}"
                                    value="<#if quizQuestion??>${quizQuestion.textEn!''}</#if>" name="textEn" placeholder="Question text en" />
@@ -155,8 +161,8 @@
                         </div>
                     </form>
                 </div>
-            <#elseif url?contains("/quiz/")>
-            <#elseif url?contains("/quiz/")>
+            <#elseIf url?contains("/quiz/")>
+            <#elseIf url?contains("/quiz/")>
                 <form method="post">
                     <div class="row">
                         <div>
@@ -193,7 +199,7 @@
                             Save
                         </#if></button>
                 </form>
-            <#elseif url?contains("/quiz")>
+            <#elseIf url?contains("/quiz")>
                 <#if quiz??>
                     <div class="row">
                         <div>
@@ -226,12 +232,12 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Сіз &#8220;${quiz.getTitleKz()}&#8221; <#if .locale = 'kz'>
-                                            емтиханын жойғалы жатырсыз. Келісесіз бе?
+                                    <p> <#if .locale = 'kz'>
+                                            Сіз &#8220;${quiz.getTitleKz()}&#8221; емтиханын жойғалы жатырсыз. Келісесіз бе?
                                         <#elseIf .locale = 'ru'>
-                                            вы собираетесь отменить свой экзамен. Согласны?
+                                            вы собираетесь отменить свой &#8220;${quiz.getTitleRu()}&#8221; экзамен. Согласны?
                                         <#else>
-                                            you're going to cancel your exam. Do you agree?
+                                            you're going to cancel your &#8220;${quiz.getTitleKz()}&#8221; exam. Do you agree?
                                         </#if></p>
                                 </div>
                                 <div class="modal-footer">
@@ -270,7 +276,7 @@
                             Add quiz
                         </#if></a>
                 </#if>
-            <#elseif url?contains("/parts/")>
+            <#elseIf url?contains("/parts/")>
                 <div class="row">
                     <div>
                         <h2><em>${coursePart.titleKz!''}</em></h2>

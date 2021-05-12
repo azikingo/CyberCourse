@@ -12,15 +12,39 @@
             <div class="carousel-item active">
                 <img class="d-block w-100" src="https://cq-esports.com/storage/uploads/posts/989042/comment-sqkxqwdpsl2jd8hdsgip2t1fdhwckagr.jpg" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>CS GO champions</h5>
-                    <p>There trains only bests</p>
+                    <h5><#if .locale = 'kz'>
+                           Dota 2 чемпиондары
+                        <#elseIf .locale = 'ru'>
+                            Чемпионы по Dota 2
+                        <#else>
+                           Dota 2 champions
+                        </#if></h5>
+                    <p><#if .locale = 'kz'>
+                            Мұнда тек ең жақсылары жаттығады
+                        <#elseIf .locale = 'ru'>
+                            Тут тренируются только лучшие
+                        <#else>
+                            Only the best train here
+                        </#if></p>
                 </div>
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="https://static.hltv.org/images/galleries/11362-full/1526856561.097.jpeg" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Dota champions</h5>
-                    <p>There trains only bests</p>
+                    <h5><#if .locale = 'kz'>
+                            CS:GO чемпиондары
+                        <#elseIf .locale = 'ru'>
+                            Чемпионы по CS:GO
+                        <#else>
+                           CS:GO champions
+                        </#if></h5>
+                    <p><#if .locale = 'kz'>
+                            Мұнда тек ең жақсылары жаттығады
+                        <#elseIf .locale = 'ru'>
+                            Тут тренируются только лучшие
+                        <#else>
+                            Only the best train here
+                        </#if></p>
                 </div>
             </div>
         </div>
@@ -513,11 +537,11 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12 col-12 mt-5"><h4><#if .locale = 'kz'>
-                        арнайы жеңілдіктер
+                        Арнайы жеңілдіктер
                     <#elseIf .locale = 'ru'>
-                        специальные скидки
+                        Специальные скидки
                     <#else>
-                        special discounts
+                        Special discounts
                     </#if></h4></div>
             <div class="col-lg-12 col-12 m-2"><p style="margin-left: 5px">
 

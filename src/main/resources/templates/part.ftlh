@@ -8,7 +8,14 @@
                 <div id="areaOne">
                     <a href="#" class="list-group-item list-group-item-action"
                        data-toggle="collapse" data-target="#menuOne" aria-expanded="true" aria-controls="menuOne">
-                        Course
+                        <#if .locale = 'kz'>
+                            Курс
+                        <#elseIf .locale = 'ru'>
+                            Курс
+                        <#else>
+                           Course
+                        </#if>
+
                     </a>
                 </div>
                 <div id="menuOne" class="collapse" aria-labelledby="areaOne" data-parent="#accordion">
@@ -110,7 +117,13 @@
                 <form method="post">
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Қазақша атауы
+                            <#if .locale = 'kz'>
+                                * Қазақша атауы
+                            <#elseIf .locale = 'ru'>
+                                * Казахское название
+                            <#else>
+                                * Kazakh name
+                            </#if>
                         </label>
                         <input type="text" class="form-control ${(titleKzError??)?string('is-invalid','')}"
                                value="<#if coursePart??>${coursePart.titleKz!''}</#if>" name="titleKz" placeholder="Course part title kz" />
@@ -122,7 +135,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Орысша атауы
+                            <#if .locale = 'kz'>
+                                * Орысша атауы
+                            <#elseIf .locale = 'ru'>
+                                Русское название
+                            <#else>
+                                Russian name
+                            </#if>
                         </label>
                         <input type="text" class="form-control ${(titleRuError??)?string('is-invalid','')}"
                                value="<#if coursePart??>${coursePart.titleRu!''}</#if>" name="titleRu" placeholder="Course part title ru" />
@@ -134,7 +153,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Ағылшынша атауы
+                            <#if .locale = 'kz'>
+                                * Ағылшынша атауы
+                            <#elseIf .locale = 'ru'>
+                                * Англиское название
+                            <#else>
+                                * English name
+                            </#if>
                         </label>
                         <input type="text" class="form-control ${(titleEnError??)?string('is-invalid','')}"
                                value="<#if coursePart??>${coursePart.titleEn!''}</#if>" name="titleEn" placeholder="Course part title en" />
@@ -146,7 +171,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Қазақша түсіндірмесі
+                            <#if .locale = 'kz'>
+                                * Қазақша түсіндірмесі
+                            <#elseIf .locale = 'ru'>
+                                * Казахское описание
+                            <#else>
+                                * Kazakh description
+                            </#if>
                         </label>
                         <textarea class="form-control ${(descriptionKzError??)?string('is-invalid', '')}"
                                   id="descriptionKz" name="descriptionKz"
@@ -159,7 +190,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Орысша түсіндірмесі
+                            <#if .locale = 'kz'>
+                                * Орысша түсіндірмесі
+                            <#elseIf .locale = 'ru'>
+                                * Русское описание
+                            <#else>
+                                * Russian description
+                            </#if>
                         </label>
                         <textarea class="form-control ${(descriptionRuError??)?string('is-invalid', '')}"
                                   id="descriptionRu" name="descriptionRu"
@@ -172,7 +209,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Ағылшынша түсіндірмесі
+                            <#if .locale = 'kz'>
+                                * Ағылшынша түсіндірмесі
+                            <#elseIf .locale = 'ru'>
+                                * Англиское описание
+                            <#else>
+                                * English description
+                            </#if>
                         </label>
                         <textarea class="form-control ${(descriptionEnError??)?string('is-invalid', '')}"
                                   id="descriptionEn" name="descriptionEn"
@@ -185,7 +228,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Ұзақтығы (Минутпен)
+                            <#if .locale = 'kz'>
+                                * Ұзақтығы(Минутпен)
+                            <#elseIf .locale = 'ru'>
+                                * Продолжительность(Минуты)
+                            <#else>
+                                * Duration(Minutes)
+                            </#if>
                         </label>
                         <input type="number" class="form-control"
                                value="<#if coursePart??>${coursePart.duration?c}</#if>" name="duration" placeholder="Course part duration" />
@@ -197,7 +246,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Шектеуі (аптамен)
+                            <#if .locale = 'kz'>
+                                * Шектеуі(Аптамен)
+                            <#elseIf .locale = 'ru'>
+                                * Ограничение (В Неделях)
+                            <#else>
+                                * Limit (Per Week)
+                            </#if>
                         </label>
                         <input type="number" class="form-control"
                                value="<#if coursePart??>${coursePart.limitTime?c}</#if>" name="limitTime" placeholder="Course part limit time" />
@@ -209,7 +264,14 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-6 col-form-label">
-                            * Сабаққа сілтеме
+                            <#if .locale = 'kz'>
+                                * Сабаққа сілтеме
+                            <#elseIf .locale = 'ru'>
+                                * Ссылка на урок
+                            <#else>
+                                * Link to the lesson
+                            </#if>
+
                         </label>
                         <input type="text" class="form-control ${(videoLinkError??)?string('is-invalid','')}"
                                value="<#if coursePart??>${coursePart.videoLink!''}</#if>" name="videoLink" placeholder="Video link" />
@@ -226,21 +288,46 @@
                     </div>
                 </form>
             </div>
-        <#elseif url?contains("/parts/")>
+        <#elseIf url?contains("/parts/")>
             <div class="row">
                 <div>
                     <h2><em>${coursePart.titleKz!''}</em></h2>
                     <p>${coursePart.descriptionKz!''}</p>
-                    <p>Duration: <em>${coursePart.duration!''} h</em></p>
-                    <p>Limit time: <em>${coursePart.limitTime!''} w</em></p>
+                    <p> <#if .locale = 'kz'>
+                             Ұзақтығы
+                        <#elseIf .locale = 'ru'>
+                             Продолжительность
+                        <#else>
+                             Duration
+                        </#if> <em>${coursePart.duration!''} h</em></p>
+                    <p>  <#if .locale = 'kz'>
+                             Шектеулі уақыт:
+                        <#elseIf .locale = 'ru'>
+                             Ограничение времени:
+                        <#else>
+                             Limit in time:
+                        </#if> <em>${coursePart.limitTime!''} w</em></p>
                     <iframe width="720" height="450" src="${coursePart.videoLink!''}">
                     </iframe>
                 </div>
                 <div>
-                    <a href="${url}/edit" class="btn btn-primary">Edit course part</a>
+                    <a href="${url}/edit" class="btn btn-primary">
+                        <#if .locale = 'kz'>
+                             Курс бөлігін енгізу
+                        <#elseIf .locale = 'ru'>
+                             Редактировать часть курса
+                        <#else>
+                             Edit course part
+                        </#if></a>
                     <#--------------------------------------Delete modal---------------------------------------->
                     <a href="#" class="btn btn-danger" data-toggle="modal"
-                       data-target="#del${coursePart.id?c}">Delete course part</a>
+                       data-target="#del${coursePart.id?c}"><#if .locale = 'kz'>
+                            Курс бөлігін жою
+                        <#elseIf .locale = 'ru'>
+                            Удалить часть курса
+                        <#else>
+                            Delete course part
+                        </#if></a>
                     <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
                          aria-labelledby="mySmallModalLabel" aria-hidden="true"
                          id="del${coursePart.id?c}">
@@ -248,24 +335,50 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title">
-                                        Сенімдісіз бе?
+                                        <#if .locale = 'kz'>
+                                           Сенімдісіз бе?
+                                        <#elseIf .locale = 'ru'>
+                                            Вы уверены?
+                                        <#else>
+                                            Are you sure?
+                                        </#if>
                                     </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Сіз &#8220;${coursePart.getTitleKz()}&#8221; бөлімін
-                                        жойғалы жатырсыз. Келісесіз бе?</p>
+                                    <p>
+                                        <#if .locale = 'kz'>
+                                            Сіз &#8220;${coursePart.getTitleKz()}&#8221; бөлімін емтиханын жойғалы жатырсыз. Келісесіз бе?
+                                        <#elseIf .locale = 'ru'>
+                                            вы собираетесь отменить свой &#8220;${coursePart.getTitleRu()}&#8221; бөлімін экзамен. Согласны?
+                                        <#else>
+                                            you're going to cancel your &#8220;${coursePart.getTitleEn()}&#8221; бөлімін exam. Do you agree?
+                                        </#if></p>
                                 </div>
                                 <div class="modal-footer">
                                     <form class="form-inline" action="${url}/del" method="post">
                                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                         <button type="submit" class="btn btn-success btn-sm px-3 mr-1">
-                                            Иә
+                                            <#if .locale = 'kz'>
+                                                Иә
+                                            <#elseIf .locale = 'ru'>
+                                                Да
+                                            <#else>
+                                               Yes
+                                            </#if>
+
                                         </button>
                                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
-                                            Жоқ
+                                            <#if .locale = 'kz'>
+                                                Жоқ
+                                            <#elseIf .locale = 'ru'>
+                                                Нет
+                                            <#else>
+                                                No
+                                            </#if>
+
                                         </button>
                                     </form>
                                 </div>
@@ -274,7 +387,7 @@
                     </div>
                 </div>
             </div>
-        <#elseif url?contains("/parts")>
+        <#elseIf url?contains("/parts")>
             <div class="row">
                 <#list courseParts as coursePart>
                     <div class="card m-4">
@@ -287,11 +400,26 @@
                             </iframe>
                         </div>
                         <div class="card-footer">
-                            <a href="${url}/${coursePart.id?c}" class="btn btn-primary">Толығырақ</a>
+                            <a href="${url}/${coursePart.id?c}" class="btn btn-primary">
+                                <#if .locale = 'kz'>
+                                    Толығырақ
+                                <#elseIf .locale = 'ru'>
+                                   Подробнее
+                                <#else>
+                                    Read more
+                                </#if>
+                            </a>
                         </div>
                     </div>
                 <#else>
-                    Курс бөлімдері тіркелмеген
+                    <#if .locale = 'kz'>
+                        Курс бөлімдері тіркелмеген
+                    <#elseIf .locale = 'ru'>
+                        Части курсы незарегестрированы
+                    <#else>
+                       Course part unregistered
+                    </#if>
+
                 </#list>
             </div>
         </#if>
