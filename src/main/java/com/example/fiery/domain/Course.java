@@ -54,6 +54,10 @@ public class Course {
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
     private List<CoursePart> courseParts = new ArrayList<>();
 
+    @OneToOne(fetch = FetchType.EAGER)
+    private User teacher;
+
+
     public Course() {
     }
 
@@ -175,5 +179,13 @@ public class Course {
 
     public void setCourseParts(List<CoursePart> courseParts) {
         this.courseParts = courseParts;
+    }
+
+    public User getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(User teacher) {
+        this.teacher = teacher;
     }
 }

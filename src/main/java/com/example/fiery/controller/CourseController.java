@@ -4,6 +4,9 @@ import com.example.fiery.domain.*;
 import com.example.fiery.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -47,11 +50,20 @@ public class CourseController {
 
 //    """"""""""""""""""""""""""""""""""""""""""""""" Courses """""""""""""""""""""""""""""""""""""""""""""""
     @GetMapping()
-    public String getCoursePage(@AuthenticationPrincipal User user, Model model)
-    {
+    public String getCoursePage(
+            @AuthenticationPrincipal User user,
+            @RequestParam(required = false) String filter,
+            @RequestParam(required = false) Category selectedCategory,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
+            Model model
+    ) {
+        if(selectedCategory != null)
+            model.addAttribute("selectedCategory", selectedCategory);
         model.addAttribute("url", "/my-courses");
         model.addAttribute("uploadPath", uploadPath);
-        model.addAttribute("courses", courseService.getAllActiveCoursesForTeacher(user));
+        model.addAttribute("filter", filter);
+        model.addAttribute("courses", courseService.getAllActiveCoursesForTeacher(user, filter, selectedCategory, pageable));
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "course";
     }
 
@@ -82,7 +94,7 @@ public class CourseController {
             return "course";
         }
 
-        Map<String, String> serviceResult = courseService.addCourse(course, file);
+        Map<String, String> serviceResult = courseService.addCourse(course, file, user);
 
         if (!serviceResult.isEmpty()) {
             model.mergeAttributes(serviceResult);

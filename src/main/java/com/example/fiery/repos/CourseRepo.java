@@ -101,6 +101,39 @@ public interface CourseRepo extends CrudRepository<Course, Long> {
             "               or lower(description_en) like lower(concat('%', ?1, '%')))", nativeQuery = true)
     List<Course> getAllActiveCoursesForStudentByFilterAndCategory(String filter, Category category, User user);
 
-    @Query(value = "select * from course where active = true and teacher_id = ?1", nativeQuery = true)
-    List<Course> getAllActiveCoursesForTeacher(User user);
+    @Query(value = "select * from course where active = true and teacher_id = ?1" +
+            "       and (lower(title_kz) like lower(concat('%', ?2, '%'))" +
+            "               or lower(title_ru) like lower(concat('%', ?2, '%'))" +
+            "               or lower(title_en) like lower(concat('%', ?2, '%'))" +
+            "               or lower(description_kz) like lower(concat('%', ?2, '%'))" +
+            "               or lower(description_ru) like lower(concat('%', ?2, '%'))" +
+            "               or lower(description_en) like lower(concat('%', ?2, '%')))",
+            countQuery = "select count(*) from course where active = true and teacher_id = ?1" +
+                    "       and (lower(title_kz) like lower(concat('%', ?2, '%'))" +
+                    "               or lower(title_ru) like lower(concat('%', ?2, '%'))" +
+                    "               or lower(title_en) like lower(concat('%', ?2, '%'))" +
+                    "               or lower(description_kz) like lower(concat('%', ?2, '%'))" +
+                    "               or lower(description_ru) like lower(concat('%', ?2, '%'))" +
+                    "               or lower(description_en) like lower(concat('%', ?2, '%')))", nativeQuery = true)
+    Page<Course> getAllActiveCoursesForTeacher(User user, String filter, Pageable pageable);
+
+    @Query(value = "select * from course c " +
+            "           join course_category cc on (c.id = cc.course_id and cc.category_id = ?3)" +
+            "       where active = true and teacher_id = ?1" +
+            "       and (lower(title_kz) like lower(concat('%', ?2, '%'))" +
+            "               or lower(title_ru) like lower(concat('%', ?2, '%'))" +
+            "               or lower(title_en) like lower(concat('%', ?2, '%'))" +
+            "               or lower(description_kz) like lower(concat('%', ?2, '%'))" +
+            "               or lower(description_ru) like lower(concat('%', ?2, '%'))" +
+            "               or lower(description_en) like lower(concat('%', ?2, '%')))",
+            countQuery = "select count(*) from course c" +
+                    "           join course_category cc on (c.id = cc.course_id and cc.category_id = ?3)" +
+                    "       where active = true and teacher_id = ?1" +
+                    "       and (lower(title_kz) like lower(concat('%', ?2, '%'))" +
+                    "               or lower(title_ru) like lower(concat('%', ?2, '%'))" +
+                    "               or lower(title_en) like lower(concat('%', ?2, '%'))" +
+                    "               or lower(description_kz) like lower(concat('%', ?2, '%'))" +
+                    "               or lower(description_ru) like lower(concat('%', ?2, '%'))" +
+                    "               or lower(description_en) like lower(concat('%', ?2, '%')))", nativeQuery = true)
+    Page<Course> getAllActiveCoursesForTeacherByFilterAndCategory(User user, String filter, Category category, Pageable pageable);
 }

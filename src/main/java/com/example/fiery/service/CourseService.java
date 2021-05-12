@@ -27,8 +27,11 @@ public class CourseService {
     @Value("${upload.path}")
     private String uploadPath;
 
-    public List<Course> getAllActiveCoursesForTeacher(User user) {
-        return courseRepo.getAllActiveCoursesForTeacher(user);
+    public Page<Course> getAllActiveCoursesForTeacher(User user, String filter, Category category, Pageable pageable) {
+        if(category == null)
+            return courseRepo.getAllActiveCoursesForTeacher(user, filter, pageable);
+        else
+            return courseRepo.getAllActiveCoursesForTeacherByFilterAndCategory(user, filter, category, pageable);
     }
 
     public List<Course> getAllActiveCoursesForStudent(String filter, Category category, User user) {
@@ -56,7 +59,7 @@ public class CourseService {
             return courseRepo.getListAllActiveCoursesByFilterAndCategory(filter, category);
     }
 
-    public Map<String, String> addCourse(Course course, MultipartFile file) throws IOException {
+    public Map<String, String> addCourse(Course course, MultipartFile file, User user) throws IOException {
         course.setTimestamp(LocalDateTime.now());
         course.setTitleKz(course.getTitleKz().replaceAll("\"", "&#8220;"));
         course.setTitleRu(course.getTitleRu().replaceAll("\"", "&#8220;"));
@@ -64,6 +67,7 @@ public class CourseService {
         course.setDescriptionKz(course.getDescriptionKz().replaceAll("\"", "&#8220;"));
         course.setDescriptionRu(course.getDescriptionRu().replaceAll("\"", "&#8220;"));
         course.setDescriptionEn(course.getDescriptionEn().replaceAll("\"", "&#8220;"));
+        course.setTeacher(user);
         saveFile(course, file);
 
         Map<String, String> result = new HashMap<>();
