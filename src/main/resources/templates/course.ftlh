@@ -318,7 +318,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <form class="form-inline" action="${url}/delete" method="post">
-                                                        <input type="hidden" name="pollId" value="${category.getId()?c}"/>
+                                                        <input type="hidden" name="id" value="${category.getId()?c}"/>
                                                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                                                         <button type="submit" class="btn btn-success btn-sm px-3 mr-1">
                                                             Иә

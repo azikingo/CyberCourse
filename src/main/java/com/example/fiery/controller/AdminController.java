@@ -1,13 +1,7 @@
 package com.example.fiery.controller;
 
-import com.example.fiery.domain.Category;
-import com.example.fiery.domain.Course;
-import com.example.fiery.domain.CoursePart;
-import com.example.fiery.domain.User;
-import com.example.fiery.service.AdminService;
-import com.example.fiery.service.CategoryService;
-import com.example.fiery.service.CoursePartService;
-import com.example.fiery.service.CourseService;
+import com.example.fiery.domain.*;
+import com.example.fiery.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -36,6 +30,9 @@ public class AdminController {
 
     @Autowired
     CategoryService categoryService;
+
+    @Autowired
+    QuizService quizService;
 
     @GetMapping
     public String adminPage(Model model)
@@ -203,58 +200,120 @@ public class AdminController {
             @PathVariable CoursePart coursePart,
             Model model
     ){
+        model.addAttribute("quiz", quizService.getQuizByCoursePart(coursePart));
         model.addAttribute("url", "/admin/course/" + course.getId() + "/parts/" + coursePart.getId() + "/quiz");
         return "coursePartDetailed";
     }
 
-    @GetMapping("/course/{course}/parts/{coursePart}/addQuiz")
+    @GetMapping("/course/{course}/parts/{coursePart}/quiz/addQuiz")
     public String addQuizPage(
             @PathVariable Course course,
             @PathVariable CoursePart coursePart,
             Model model
     ){
-        model.addAttribute("url", "/admin/course/" + course.getId() + "/addPart/" + coursePart.getId() + "/addQuiz");
+        model.addAttribute("url", "/admin/course/" + course.getId() + "/parts/" + coursePart.getId() + "/quiz/addQuiz");
         return "coursePartDetailed";
     }
 
-//    @PostMapping("/course/{course}/addPart")
-//    public String addCoursePart(
-//            @Valid CoursePart coursePart,
-//            @PathVariable Course course, BindingResult bindingResult,
-//            @AuthenticationPrincipal User user, Model model,
-//            @RequestParam(defaultValue = "none") String alert
-//    ) throws IOException {
-//        if (user == null)
-//            return "redirect:/";
-//
-//        model.addAttribute("url", "/admin/course/" + course.getId() + "/addPart");
-//        model.addAttribute("alert", alert);
-//
-//        if (bindingResult.hasErrors()) {
-//            Map<String, String> bindErrors = ControllerUtils.getErrors(bindingResult);
-//            model.mergeAttributes(bindErrors);
-//            return "courseDetailed";
-//        }
-//
-//        Map<String, String> serviceResult = coursePartService.addCoursePart(course, coursePart);
-//
-//        if (!serviceResult.isEmpty()) {
-//            model.mergeAttributes(serviceResult);
-//            return "courseDetailed";
-//        }
-//
-//        return "redirect:/admin/course/" + course.getId() + "/parts";
-//    }
-//
-//    @GetMapping("/course/{course}/parts/{coursePart}")
-//    public String getCoursePartDetail(
-//            @PathVariable Course course,
-//            @PathVariable CoursePart coursePart,
-//            Model model
-//    ){
-//        model.addAttribute("url", "/admin/course/" + course.getId() + "/parts/" + coursePart.getId());
-//        return "coursePartDetailed";
-//    }
+    @PostMapping("/course/{course}/parts/{coursePart}/quiz/addQuiz")
+    public String addQuiz(
+            @Valid Quiz quiz,
+            @PathVariable Course course,
+            @PathVariable CoursePart coursePart, BindingResult bindingResult,
+            @AuthenticationPrincipal User user, Model model,
+            @RequestParam(defaultValue = "none") String alert
+    ) throws IOException {
+        if (user == null)
+            return "redirect:/";
+
+        model.addAttribute("url", "/admin/course/" + course.getId() + "/parts/" + coursePart.getId() + "/quiz/addQuiz");
+        model.addAttribute("alert", alert);
+
+        if (bindingResult.hasErrors()) {
+            Map<String, String> bindErrors = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(bindErrors);
+            return "coursePartDetailed";
+        }
+
+        Map<String, String> serviceResult = quizService.addQuiz(coursePart, quiz);
+
+        if (!serviceResult.isEmpty()) {
+            model.mergeAttributes(serviceResult);
+            return "coursePartDetailed";
+        }
+
+        return "redirect:/admin/course/" + course.getId() + "/parts/" + coursePart.getId() + "/quiz";
+    }
+
+    @GetMapping("/course/{course}/parts/{coursePart}/quiz/edit")
+    public String editQuizPage(
+            @PathVariable Course course,
+            @PathVariable CoursePart coursePart,
+            Model model
+    ){
+        model.addAttribute("quiz", quizService.getQuizByCoursePart(coursePart));
+        model.addAttribute("url", "/admin/course/" + course.getId() + "/parts/" + coursePart.getId() + "/quiz/edit");
+        return "coursePartDetailed";
+    }
+
+    @PostMapping("/course/{course}/parts/{coursePart}/quiz/edit")
+    public String editQuiz(
+            @Valid Quiz quiz,
+            @PathVariable Course course,
+            @PathVariable CoursePart coursePart,
+//            @RequestParam Long quizId,
+            @AuthenticationPrincipal User user,
+            @RequestParam(defaultValue = "none") String alert, Model model, BindingResult bindingResult
+    ) throws IOException{
+        if (user == null)
+            return "redirect:/";
+
+        model.addAttribute("url", "/admin/course/" + course.getId() + "/parts/" + coursePart.getId() + "/quiz/edit");
+        model.addAttribute("alert", alert);
+
+        Map<String, String> serviceResult = quizService.editQuiz(quiz);
+
+        if (!serviceResult.isEmpty()) {
+            model.mergeAttributes(serviceResult);
+            return "coursePartDetailed";
+        }
+
+        return "redirect:/admin/course/" + course.getId() + "/parts/" + coursePart.getId() + "/quiz";
+    }
+
+    @PostMapping("/course/{course}/parts/{coursePart}/quiz/delete")
+    public String deleteQuiz(
+            @PathVariable Course course,
+            @PathVariable CoursePart coursePart,
+            @RequestParam Long quizId,
+            @AuthenticationPrincipal User user,
+            @RequestParam(defaultValue = "none") String alert, Model model
+    ) throws IOException{
+        if (user == null)
+            return "redirect:/";
+
+        model.addAttribute("url", "/admin/course/" + course.getId() + "/parts/" + coursePart.getId() + "/quiz");
+        model.addAttribute("alert", alert);
+
+        Map<String, String> serviceResult = quizService.deleteQuiz(quizId);
+
+        if (!serviceResult.isEmpty()) {
+            model.mergeAttributes(serviceResult);
+            return "coursePartDetailed";
+        }
+
+        return "redirect:/admin/course/" + course.getId() + "/parts/" + coursePart.getId() + "/quiz";
+    }
+
+    @GetMapping("/course/{course}/parts/{coursePart}/quiz/addQuestion")
+    public String addQuestionPage(
+            @PathVariable Course course,
+            @PathVariable CoursePart coursePart,
+            Model model
+    ){
+        model.addAttribute("url", "/admin/course/" + course.getId() + "/parts/" + coursePart.getId() + "/quiz/addQuestion");
+        return "question";
+    }
 
 
 
