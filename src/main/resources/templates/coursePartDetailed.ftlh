@@ -250,20 +250,26 @@
         <#elseIf url?contains("/quiz")>
             <#if quiz??>
                 <div class="row">
-                    <div>
-                        <h2><em>${quiz.titleKz!''}</em></h2>
+                    <div class="col-lg-12 text-center col-12">
+                        <h2><em>&#8220;${quiz.titleKz!''}&#8221; емтиханы</em></h2>
+                    </div>
+                    <div class="col-lg-12 text-center col-12 m-2">
                         <p>${quiz.descriptionKz!''}</p>
                     </div>
                 </div>
                 <#if quizQuestions??>
                     <div class="rounded">
-                        <div class="text-info"><b><#if .locale = 'kz'>
+                        <div class="text-info">
+                            <b>
+                                <#if .locale = 'kz'>
                                     Емтихан сұрақтары
                                 <#elseIf .locale = 'ru'>
                                     Вопросы екзамена
                                 <#else>
                                     Exam questions
-                                </#if></b></div>
+                                </#if>
+                            </b>
+                        </div>
                         <table class="table table-sm table-hover">
                             <thead>
                             <tr class="">
@@ -386,89 +392,97 @@
                                             Никакой вопрос не включен
                                         <#else>
                                             No questions added
-                                        </#if></th>
+                                        </#if>
+                                    </th>
                                 </tr>
                             </#list>
                             </tbody>
                         </table>
                     </div>
                 </#if>
-                <input type="hidden" name="quizId" value="${quiz.getId()?c}"/>
-                <a class="btn btn-primary" href="${url}/${quiz.getId()?c}/addQuestion" role="button"><#if .locale = 'kz'>
-                        Сұрақ қосу
-                    <#elseIf .locale = 'ru'>
-                        Добавить вопрос
-                    <#else>
-                        Add question
-                    </#if></a>
-                <a class="btn btn-warning" href="${url}/edit" role="button"><#if .locale = 'kz'>
-                        Тест редакциалау
-                    <#elseIf .locale = 'ru'>
-                        Редактировать тест
-                    <#else>
-                        Edit quiz
-                    </#if></a>
-                <#--------------------------------------Delete modal---------------------------------------->
-                <a href="#" class="btn btn-danger" data-toggle="modal"
-                   data-target="#del${quiz.id?c}">
-                    <#if .locale = 'kz'>
-                        Тестті өшіру
-                    <#elseIf .locale = 'ru'>
-                        Удалить тест
-                    <#else>
-                        Delete quiz
-                    </#if></a>
-                <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
-                     aria-labelledby="mySmallModalLabel" aria-hidden="true"
-                     id="del${quiz.id?c}">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">
-                                    <#if .locale = 'kz'>
-                                        Сенімдісізбе?
-                                    <#elseIf .locale = 'ru'>
-                                        Вы уверены?
-                                    <#else>
-                                        Are you sure?
-                                    </#if>
-                                </h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p><#if .locale = 'kz'>
-                                        Сіз &#8220;${quizQuestion.getTextKz()}&#8221; емтиханын жойғалы жатырсыз. Келісесіз бе?
-                                    <#elseIf .locale = 'ru'>
-                                        вы собираетесь отменить свой &#8220;${quizQuestion.getTextRu()}&#8221; экзамен. Согласны?
-                                    <#else>
-                                        you're going to cancel your &#8220;${quizQuestion.getTextEn()}&#8221; exam. Do you agree?
-                                    </#if></p>
-                            </div>
-                            <div class="modal-footer">
-                                <form class="form-inline" action="${url}/del" method="post">
-                                    <input type="hidden" name="quizId" value="${quiz.getId()?c}"/>
-                                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                    <button type="submit" class="btn btn-success btn-sm px-3 mr-1">
+                <div class="row">
+                    <div class="col-lg-12 col-12 mt-5">
+                        <hr class="m-0" style="opacity: 80%">
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-3">
+                    <input type="hidden" name="quizId" value="${quiz.getId()?c}"/>
+                    <a class="btn btn-primary m-2" href="${url}/${quiz.getId()?c}/addQuestion" role="button"><#if .locale = 'kz'>
+                            Сұрақ қосу
+                        <#elseIf .locale = 'ru'>
+                            Добавить вопрос
+                        <#else>
+                            Add question
+                        </#if></a>
+                    <a class="btn btn-warning m-2" href="${url}/edit" role="button"><#if .locale = 'kz'>
+                            Тест редакциалау
+                        <#elseIf .locale = 'ru'>
+                            Редактировать тест
+                        <#else>
+                            Edit quiz
+                        </#if></a>
+                    <#--------------------------------------Delete modal---------------------------------------->
+                    <a href="#" class="btn btn-danger m-2" data-toggle="modal"
+                       data-target="#del${quiz.id?c}">
+                        <#if .locale = 'kz'>
+                            Тестті өшіру
+                        <#elseIf .locale = 'ru'>
+                            Удалить тест
+                        <#else>
+                            Delete quiz
+                        </#if></a>
+                    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog"
+                         aria-labelledby="mySmallModalLabel" aria-hidden="true"
+                         id="del${quiz.id?c}">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">
                                         <#if .locale = 'kz'>
-                                            Иә
+                                            Сенімдісізбе?
                                         <#elseIf .locale = 'ru'>
-                                            Да
+                                            Вы уверены?
                                         <#else>
-                                            Yes
+                                            Are you sure?
                                         </#if>
+                                    </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
-                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
-                                        <#if .locale = 'kz'>
-                                            Жоқ
+                                </div>
+                                <div class="modal-body">
+                                    <p><#if .locale = 'kz'>
+                                            Сіз &#8220;${quizQuestion.getTextKz()}&#8221; емтиханын жойғалы жатырсыз. Келісесіз бе?
                                         <#elseIf .locale = 'ru'>
-                                            Нет
+                                            вы собираетесь отменить свой &#8220;${quizQuestion.getTextRu()}&#8221; экзамен. Согласны?
                                         <#else>
-                                            No
-                                        </#if>
-                                    </button>
-                                </form>
+                                            you're going to cancel your &#8220;${quizQuestion.getTextEn()}&#8221; exam. Do you agree?
+                                        </#if></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form class="form-inline" action="${url}/del" method="post">
+                                        <input type="hidden" name="quizId" value="${quiz.getId()?c}"/>
+                                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                                        <button type="submit" class="btn btn-success btn-sm px-3 mr-1">
+                                            <#if .locale = 'kz'>
+                                                Иә
+                                            <#elseIf .locale = 'ru'>
+                                                Да
+                                            <#else>
+                                                Yes
+                                            </#if>
+                                        </button>
+                                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">
+                                            <#if .locale = 'kz'>
+                                                Жоқ
+                                            <#elseIf .locale = 'ru'>
+                                                Нет
+                                            <#else>
+                                                No
+                                            </#if>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

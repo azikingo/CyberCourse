@@ -37,51 +37,64 @@
             </div>
         </div>
         <#if isRegisterForm>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label"> <#if .locale = 'kz'>
-                    Пароль:
-                <#elseIf .locale = 'ru'>
-                    Пароль:
-                <#else>
-                    Password:
-                </#if> </label>
-            <div class="col-sm-5">
-                <input type="password" name="password2"
-                       class="form-control ${(password2Error??)?string('is-invalid','')}"
-                       placeholder="Retype password">
-                <#if password2Error??>
-                    <div class="invalid-feedback">
-                        ${password2Error}
-                    </div>
-                </#if>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"> <#if .locale = 'kz'>
+                        Пароль:
+                    <#elseIf .locale = 'ru'>
+                        Пароль:
+                    <#else>
+                        Password:
+                    </#if> </label>
+                <div class="col-sm-5">
+                    <input type="password" name="password2"
+                           class="form-control ${(password2Error??)?string('is-invalid','')}"
+                           placeholder="Retype password">
+                    <#if password2Error??>
+                        <div class="invalid-feedback">
+                            ${password2Error}
+                        </div>
+                    </#if>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label"> <#if .locale = 'kz'>
-                    Почта:
-                <#elseIf .locale = 'ru'>
-                    Почта:
-                <#else>
-                    Email:
-                </#if> </label>
-            <div class="col-sm-5">
-                <input type="email" name="email" value="<#if user??>${user.email}</#if>"
-                       class="form-control ${(emailError??)?string('is-invalid','')}" placeholder="some@some.com">
-                <#if emailError??>
-                    <div class="invalid-feedback">
-                        ${emailError}
-                    </div>
-                </#if>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"> <#if .locale = 'kz'>
+                        Почта:
+                    <#elseIf .locale = 'ru'>
+                        Почта:
+                    <#else>
+                        Email:
+                    </#if> </label>
+                <div class="col-sm-5">
+                    <input type="email" name="email" value="<#if user??>${user.email}</#if>"
+                           class="form-control ${(emailError??)?string('is-invalid','')}" placeholder="some@some.com">
+                    <#if emailError??>
+                        <div class="invalid-feedback">
+                            ${emailError}
+                        </div>
+                    </#if>
+                </div>
             </div>
-        </div>
-        <#--<div class="form-group row-sm-auto">-->
-            <#--<div class="g-recaptcha" data-sitekey = "6Ld3v2IaAAAAAMxl7Q71_FKxuYIvNbJeaRoMRm55"></div>-->
-            <#--<#if captchaError??>-->
-                <#--<div class="alert alert-danger" role="alert">-->
-                    <#--${captchaError}-->
-                <#--</div>-->
-            <#--</#if>-->
-        <#--</div>-->
+            <div class="form-group row">
+                <div class="col-lg-12 col-12 text-center mr-2">
+                    <select class="selectpicker form-select" name="role" data-style="select-with-transition btn btn-primary">
+                        <option value="student">
+                            Student
+                        </option>
+                        <option value="teacher">
+                            Teacher
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <#--<div class="form-group row-sm-auto">-->
+                <#--<div class="g-recaptcha" data-sitekey = "6Ld3v2IaAAAAAMxl7Q71_FKxuYIvNbJeaRoMRm55"></div>-->
+                <#--<#if captchaError??>-->
+                    <#--<div class="alert alert-danger" role="alert">-->
+                        <#--${captchaError}-->
+                    <#--</div>-->
+                <#--</#if>-->
+            <#--</div>-->
         </#if>
         <div class="form-group row-sm-auto">
             <input type="hidden" name="_csrf" value="${_csrf.token}" />

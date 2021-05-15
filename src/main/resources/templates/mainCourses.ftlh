@@ -40,6 +40,11 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-lg-12 col-12 my-3">
+                    <hr class="m-0" style="opacity: 80%">
+                </div>
+            </div>
+            <div class="row my-3">
                 <@p.pager url courses />
                     <div class="card-columns">
                         <#list courses.content as course>
@@ -95,17 +100,19 @@
                     <h3><em>${course.price!''} kzt</em></h3>
                 </div>
                 <div class="col-lg-2 col-2 text-right my-3">
-<#--                    <#if isStudent>-->
-                        <a href="/student/my-courses/${course.id?c}/sub" class="btn btn-primary">
-                            <#if .locale = 'kz'>
-                                Тіркелу
-                            <#elseIf .locale = 'ru'>
-                                Подписаться
-                            <#else>
-                                Subscribe
-                            </#if>
-                        </a>
-<#--                    </#if>-->
+                    <#if isStudent || !known>
+<#--                        <form action="/course/${course.id?c}/sub" method="post">-->
+                            <a href="/course/${course.id?c}/sub" class="btn btn-primary">
+                                <#if .locale = 'kz'>
+                                    Тіркелу
+                                <#elseIf .locale = 'ru'>
+                                    Подписаться
+                                <#else>
+                                    Subscribe
+                                </#if>
+                            </a>
+<#--                        </form>-->
+                    </#if>
                 </div>
 <#--                <div class="col-lg-12 col-12">-->
 <#--                    <p>Course duration: <em>${course.duration!'4h'}</em></p>-->

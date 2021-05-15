@@ -2,8 +2,10 @@ package com.example.fiery.service;
 
 import com.example.fiery.domain.Category;
 import com.example.fiery.domain.Course;
+import com.example.fiery.domain.CourseResult;
 import com.example.fiery.domain.User;
 import com.example.fiery.repos.CourseRepo;
+import com.example.fiery.repos.CourseResultRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -24,6 +26,9 @@ public class CourseService {
     @Autowired
     CourseRepo courseRepo;
 
+    @Autowired
+    CourseResultRepo courseResultRepo;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -34,11 +39,11 @@ public class CourseService {
             return courseRepo.getAllActiveCoursesForTeacherByFilterAndCategory(user, filter, category, pageable);
     }
 
-    public List<Course> getAllActiveCoursesForStudent(String filter, Category category, User user) {
+    public Page<Course> getAllActiveCoursesForStudent(String filter, Category category, User user, Pageable pageable) {
         if(category == null)
-            return courseRepo.getAllActiveCoursesForStudent(filter, user);
+            return courseRepo.getAllActiveCoursesForStudent(filter, user, pageable);
         else
-            return courseRepo.getAllActiveCoursesForStudentByFilterAndCategory(filter, category, user);
+            return courseRepo.getAllActiveCoursesForStudentByFilterAndCategory(filter, category, user, pageable);
     }
 
     public Page<Course> getAllActiveCourses(String filter, Category category, Pageable pageable) {
@@ -102,6 +107,24 @@ public class CourseService {
         Map<String, String> result = new HashMap<>();
         try {
             courseRepo.save(courseFromDb);
+        } catch (Exception e) {
+            result.put("message", "Сақталмады! Жүйеде қателік шықты.");
+            return result;
+        }
+
+        return result;
+    }
+
+    public Map<String, String> subscribeStudent(Course course, User student) {
+        CourseResult courseResult = new CourseResult();
+        courseResult.setTimestamp(LocalDateTime.now());
+        courseResult.setCourse(course);
+        courseResult.setStudent(student);
+        courseResult.setFinished(false);
+
+        Map<String, String> result = new HashMap<>();
+        try {
+            courseResultRepo.save(courseResult);
         } catch (Exception e) {
             result.put("message", "Сақталмады! Жүйеде қателік шықты.");
             return result;

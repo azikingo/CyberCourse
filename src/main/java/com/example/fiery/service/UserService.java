@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public boolean addUser(User user){
+    public boolean addUser(User user, String role){
         User userFromDb = userRepo.findByUsername(user.getUsername());
 
         if (userFromDb != null){
@@ -42,7 +42,10 @@ public class UserService implements UserDetailsService {
         }
 
         user.setActive(false);
-        user.setRoles(Collections.singleton(Role.student));
+        if(role == "student")
+            user.setRoles(Collections.singleton(Role.student));
+        else
+            user.setRoles(Collections.singleton(Role.teacher));
         user.setActivationCode(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 

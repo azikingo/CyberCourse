@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -86,6 +87,27 @@ public class MainController {
 
         model.addAttribute("url", "/course/" + course.getId());
         return "mainCourses";
+    }
+
+    @GetMapping("/course/{course}/sub")
+    public String subscribeToCourse(
+            @AuthenticationPrincipal User user,
+            @PathVariable Course course,
+            Model model
+    ) {
+        if (user == null)
+            return "redirect:/";
+
+        model.addAttribute("url", "/course/" + course.getId() + "/sub");
+
+        Map<String, String> serviceResult = courseService.subscribeStudent(course, user);
+
+        if (!serviceResult.isEmpty()) {
+            model.mergeAttributes(serviceResult);
+            return "mainCourses";
+        }
+
+        return "redirect:/student/my-courses";
     }
 
 //    Get images

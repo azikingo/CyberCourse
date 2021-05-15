@@ -98,6 +98,11 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-lg-12 col-12 my-3">
+                    <hr class="m-0" style="opacity: 80%">
+                </div>
+            </div>
+            <div class="row my-3">
                 <@p.pager url courses />
                 <div class="card-columns">
                     <#list courses.content as course>

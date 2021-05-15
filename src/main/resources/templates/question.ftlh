@@ -162,7 +162,6 @@
                     </form>
                 </div>
             <#elseIf url?contains("/quiz/")>
-            <#elseIf url?contains("/quiz/")>
                 <form method="post">
                     <div class="row">
                         <div>
@@ -202,8 +201,10 @@
             <#elseIf url?contains("/quiz")>
                 <#if quiz??>
                     <div class="row">
-                        <div>
+                        <div class="col-lg-12 col-12 text-center my-5">
                             <h2><em>${quiz.titleKz!''}</em></h2>
+                        </div>
+                        <div>
                             <p>${quiz.descriptionKz!''}</p>
                         </div>
                     </div>

@@ -39,6 +39,7 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String addUser(
             @RequestParam("password2") String passwordConfirm,
+            @RequestParam String role,
 //            @RequestParam("g-recaptcha-response") String captchaResponse,
             @Valid User user,
             BindingResult bindingResult,
@@ -64,7 +65,7 @@ public class RegistrationController {
             model.mergeAttributes(errors);
             return "registration";
         }
-        if(!userService.addUser(user)){
+        if(!userService.addUser(user, role)){
             model.addAttribute("usernameError", "User exists!");
             return "registration";
         }
